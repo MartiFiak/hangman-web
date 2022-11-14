@@ -17,7 +17,7 @@ type Test struct {
     Word string
 }
 
-func Main() {
+func main() {
     http.HandleFunc("/", Handler) // Ici, quand on arrive sur la racine, on appelle la fonction Handler
     //
     fs := http.FileServer(http.Dir("./"))
