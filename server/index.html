@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HangmanWeb</title>
+<<<<<<< HEAD
     <link rel='stylesheet' href='style.css'>
+=======
+	<link rel="stylesheet" href="style.css">
+>>>>>>> 5b6fcc6656d8073062993b8ab1cb2c6130f83937
 </head>
 <body>
     <div>
@@ -15,12 +19,21 @@
 
         <p> {{ .LetterUsed}}</p>
 
+<<<<<<< HEAD
         <form action="/hangman" method="post">
             <input id="inputBox" name="input" type="text" />
             <input type="submit" value="Entrer" />
         </form>
 
     </div>
+=======
+    <form action="/hangman" method="post">
+        <input id="inputBox" name="input" type="text" />
+        <input type="submit" value="Entrer"/>
+    </form>
+    <h1>{{ .Message}}</h1>
+
+>>>>>>> 5b6fcc6656d8073062993b8ab1cb2c6130f83937
 </body>
 <style>
     h1 {

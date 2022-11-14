@@ -1,46 +1,75 @@
 package main
 
 import (
+	"fmt"
+	"hangmanweb"
 	"net/http"
+	"strconv"
 	"text/template"
-    "hangmanweb"
 )
 
-const (
-	link= "<link rel='stylesheet' href='style.css'>"
-)
+var dataList = hangmanweb.InitGame()
 
-// Je crée ma structure
-type Test struct {
-    MaVariable string
-    LetterUsed string
-    Word string
+type Hangman struct {
+	WordToFind string
+	MaVariable string
+	Attempts   int
+	LetterUsed string
+	Word       string
+	Input      string
+    Message    string
+}
+
+var data = Hangman{
+	WordToFind: dataList[0],
+	Attempts:   10,
+	LetterUsed: dataList[2],
+	Word:       dataList[1],
+	Input:      "",
+	Message:      "",
 }
 
 func main() {
-    http.HandleFunc("/", Handler) // Ici, quand on arrive sur la racine, on appelle la fonction Handler
-    //
-    fs := http.FileServer(http.Dir("./"))
-    http.Handle("/static/", http.StripPrefix("/static/", fs))
-    //
+	http.HandleFunc("/", Handler)
 
-    http.HandleFunc("/hangman", Handler) // Ici, on redirige vers /hangman pour effectuer les fonctions POST
-    http.ListenAndServe(":8080", nil)    // On lance le serveur local sur le port 8080
+	fs := http.FileServer(http.Dir("./"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-    hangmanweb.Hangmanweb()
+	http.HandleFunc("/hangman", Handler)
+	http.ListenAndServe(":8080", nil)
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-    // J'utilise la librairie tmpl pour créer un template qui va chercher mon fichier index.html
-    tmpl := template.Must(template.ParseFiles("index.html"))
 
-    // Je crée une variable qui définit ma structure
-    data := Test{
-        MaVariable: "Oueba",
-        LetterUsed: "hasdw",
-        Word: "Hello",
-    }
+	tmpl := template.Must(template.ParseFiles("index.html"))
 
-    // J'execute le template avec les données
-    tmpl.Execute(w, data)
+	switch r.Method {
+	case "POST": // Gestion d'erreur
+		if err := r.ParseForm(); err != nil {
+			fmt.Println(err)
+			return
+		} else {
+			input := r.Form.Get("input")
+			dataList = hangmanweb.InputTreatment(data.Word, data.WordToFind, input, data.LetterUsed, 0, data.Attempts)
+			attempts, _ := strconv.Atoi(dataList[3])
+			if dataList[0] == "Okey" {
+				data.Attempts = attempts
+				data.LetterUsed = dataList[4]
+				data.Word = dataList[1]
+				data.Input = input
+				tmpl.Execute(w, data)
+				return
+			} else if dataList[0] == "Nop" {
+                tmpl.Execute(w, data)
+				return
+			} else {
+                data.Message = dataList[0]
+                tmpl.Execute(w, data)
+				return
+            }
+		}
+	default:
+		tmpl.Execute(w, data)
+	}
+
 }
