@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HangmanWeb</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+    <div>
+        <h1>Hangman Web</h1>
+
+        <h2>{{ .Word}}</h2>
+
+        <p> {{ .LetterUsed}}</p>
+
+        <form action="/hangman" method="post">
+            <input id="inputBox" name="input" type="text" />
+            <input type="submit" value="Entrer" />
+        </form>
+
+    </div>
+</body>
+<style>
+    h1 {
+      color: #58BC82;
+      }
+    h2 {
+        color: #FFFF;
+    }
+    p {
+        color: #5B6D99;
+    }
+    body{
+        background: url(https://cdn.discordapp.com/attachments/1018825015422111744/1041707877427069039/bfi7u2yry0zy.png);
+        background-size: cover;
+    }
+    div{
+
+        width: 50%;
+        border-radius: 10px;
+        width: 500px;
+        height: 600px;
+        margin: auto;
+        border: 3px solid rgba(41, 40, 40, 0.846);
+        padding: 10px;
+        background-color: #37323B;
+        text-align: center;
+        text-align: justify;
+
+    }
+</style>
+
+</html>

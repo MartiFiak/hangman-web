@@ -3,11 +3,7 @@ package main
 import (
 	"net/http"
 	"text/template"
-<<<<<<<< HEAD:server/serveur.go
-    "hangman-web"
-========
     "hangmanweb"
->>>>>>>> 49f6ebefc0d636303775bd0d09249331a4995be3:server/main.go
 )
 
 const (
