@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HangmanWeb</title>
-	<link rel='stylesheet' href='style.css'>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Hangman Web</h1>
@@ -16,8 +16,10 @@
 
     <form action="/hangman" method="post">
         <input id="inputBox" name="input" type="text" />
-        <input type="submit" value="Entrer" />
+        <input type="submit" value="Entrer"/>
     </form>
+    <h1>{{ .Message}}</h1>
+
 </body>
 
 
