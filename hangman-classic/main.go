@@ -1,12 +1,13 @@
-package main
+package hangman
 
 import (
-	hangman "hangman/fonctions"
 	"math/rand"
 	"time"
+
+	hangman "hangmanweb/hangman-classic/fonctions"
 )
 
-func main() {
+func Main() {
 	mode := "classique"
 
 	hangmanStep := [][]string{}
@@ -14,7 +15,7 @@ func main() {
 	for i := 0; i < hangman.Len(hangman.Read("assets/hangman.txt")); i += 8 {
 		hangmanStep = append(hangmanStep, hangman.Read("assets/hangman.txt")[i:i+8])
 	}
-	
+
 	word := ""
 	attempts := 10
 	useLettre := []string{}
@@ -31,6 +32,6 @@ func main() {
 	}
 
 	word, useLettre = hangman.RandomReveal(hangman.Len(hangman.StringToSlice(wordToFind))/2-1, word, wordToFind)
-	
+
 	hangman.Round(mode, wordToFind, word, 0, attempts, hangmanStep, useLettre, message)
 }

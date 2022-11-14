@@ -1,3 +1,3 @@
-module hangman
+module hangmanweb
 
 go 1.19

@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"text/template"
+    "hangmanweb"
 )
 
 const (
@@ -16,15 +17,17 @@ type Test struct {
     Word string
 }
 
-func main() {
+func Main() {
     http.HandleFunc("/", Handler) // Ici, quand on arrive sur la racine, on appelle la fonction Handler
     //
-    fs := http.FileServer(http.Dir("./static"))
+    fs := http.FileServer(http.Dir("./"))
     http.Handle("/static/", http.StripPrefix("/static/", fs))
     //
 
     http.HandleFunc("/hangman", Handler) // Ici, on redirige vers /hangman pour effectuer les fonctions POST
     http.ListenAndServe(":8080", nil)    // On lance le serveur local sur le port 8080
+
+    hangmanweb.Hangmanweb()
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
