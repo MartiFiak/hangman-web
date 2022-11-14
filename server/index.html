@@ -1,5 +1,3 @@
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,18 +8,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
+    <div class="pincipal">
+
         <h1>Hangman Web</h1>
 
+        <h1>{{ .Message}}</h1>
+
         <h2>{{ .Word}}</h2>
-
         <p> {{ .LetterUsed}}</p>
-
         <form action="/hangman" method="post">
             <input id="inputBox" name="input" type="text" />
             <input type="submit" value="Entrer" />
         </form>
-        <h1>{{ .Message}}</h1>
 
     </div>
 
@@ -53,12 +51,6 @@
 
 
     }
-    body{
-        background: url(https://cdn.discordapp.com/attachments/1018825015422111744/1041707877427069039/bfi7u2yry0zy.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        }
     div{
         width: 50%;
         border-radius: 10px;

@@ -63,6 +63,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
                 tmpl.Execute(w, data)
 				return
 			} else {
+				data.Word = dataList[1]
                 data.Message = dataList[0]
                 tmpl.Execute(w, data)
 				return
