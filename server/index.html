@@ -14,8 +14,10 @@
 
     <p> {{ .LetterUsed}}</p>
 
-    <input type="text">
-    <button type="submit"></button>
+    <form action="/hangman" method="post">
+        <input id="inputBox" name="input" type="text" />
+        <input type="submit" value="Entrer" />
+    </form>
 </body>
 
 
