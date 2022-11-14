@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"text/template"
+    "hangman-web"
 )
 
 const (
