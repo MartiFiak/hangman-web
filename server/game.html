@@ -15,6 +15,7 @@
             <!-- Logo -->
             <div class="logo">
                 <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
+                <p>{{ .PlayerName}}</p>
             </div>
         </div>
     <!--rightbox-->
@@ -47,8 +48,8 @@
             <p class="letterUsed"> {{ .LetterUsed}}</p>
             {{ end }}
 
-            <form action="/hangman" method="post">
-                <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word"/> <br>
+            <form method="post">
+                <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word"/>
                 <input class="buttonInput" type="submit" value="Valide Choice" />
             </form>
 

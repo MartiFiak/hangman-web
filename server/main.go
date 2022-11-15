@@ -11,37 +11,35 @@ import (
 var dataList []string
 
 type Hangman struct {
+	PlayerName string
 	WordToFind string
 	MaVariable string
 	Attempts   int
 	LetterUsed string
 	Word       string
 	Input      string
-    Message    string
+	Message    string
 }
 
 var data Hangman
-
-var userName string
 
 func main() {
 	fs := http.FileServer(http.Dir("./css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
 
-	
 	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/hangman", GameHandler)
 	http.HandleFunc("/rules", RulesHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
-func RulesHandler(w http.ResponseWriter, r *http.Request){
+func RulesHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("rules.html"))
 	tmpl.Execute(w, nil)
 }
 
-func GameHandler(w http.ResponseWriter, r *http.Request){
+func GameHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("game.html"))
 
@@ -72,6 +70,7 @@ func GameHandler(w http.ResponseWriter, r *http.Request){
 			}
 		}
 	default:
+		fmt.Println(r.Method)
 		tmpl.Execute(w, data)
 	}
 }
@@ -80,33 +79,32 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("index.html"))
 
-	dataList = hangmanweb.InitGame()
-
 	switch r.Method {
 	case "POST":
+		fmt.Println("Hey Post")
 		if err := r.ParseForm(); err != nil {
 			fmt.Println(err)
 			return
 		} else {
-			input := r.Form.Get("usernameinput")
+			input := r.FormValue("input")
 			fmt.Println(input)
 			if hangmanweb.InputUsernameTreatment(input) {
-				userName = input
-
+				dataList = hangmanweb.InitGame()
 				data = Hangman{
+					PlayerName: input,
 					WordToFind: dataList[0],
 					Attempts:   10,
 					LetterUsed: dataList[2],
 					Word:       dataList[1],
 					Input:      "",
-					Message:      "",
+					Message:    "",
 				}
-				tmpl.Execute(w, data)
+				http.Redirect(w, r, "/hangman", http.StatusFound)
+				return
 			}
 		}
 	default:
-		fmt.Println("Enter an username")
 	}
-
 	tmpl.Execute(w, nil)
+
 }
