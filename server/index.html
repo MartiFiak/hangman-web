@@ -5,66 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HangmanWeb</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="pincipal">
+    <div class="principal">
 
-        <h1>Hangman Web</h1>
+        <h1 class="title">Hangman Web</h1>
 
-        <h1>{{ .Message}}</h1>
-
-        <h2>{{ .Word}}</h2>
-        <p> {{ .LetterUsed}}</p>
         <form action="/hangman" method="post">
-            <input id="inputBox" name="input" type="text" />
-            <input type="submit" value="Entrer" />
+            <input class="buttonInput" type="submit" value="Start Game" />
         </form>
 
     </div>
 
 </body>
-<style>
-
-    h1 {
-      color: #6477a7;
-      text-align: justify;
-      text-align: center;
-      font-family: Arial, Helvetica, sans-serif;
-      }
-    h2 {
-        color: #FFFF;
-        text-align: justify;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    p {
-        color: #ffffff;
-        text-align: justify; 
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    form {
-        text-align: center;
-        position: relative;
-        top: 380px;
-
-
-    }
-    div{
-        width: 50%;
-        border-radius: 10px;
-        width: 500px;
-        height: 600px;
-        margin: auto;
-        border: 5px solid #4b4650;
-        padding: 10px;
-        background-color: #37323B;
-        text-align: center;
-        text-align: justify;
-
-
-    }
-</style>
 
 </html>
