@@ -1,0 +1,88 @@
+div#content div{
+    display: inline-block;
+    width: 48%; 
+    background-color: blue;
+}
+div#content div.leftbox{
+
+    vertical-align: top;
+
+}
+div#content div.rightbox{
+
+    vertical-align: top;
+    background-color: pink;
+}
+
+nav.menu ul li.bouton{
+    list-style-type: none;
+    display: inline-block;
+}
+
+ul {
+    background-color: aqua;
+}
+
+nav.menu ul li.bouton a{
+    color: red;
+
+    text-decoration: none;
+    padding: 0px 20px;
+    display: block;
+    margin: 0 0px;
+    transition: 1s all;
+}
+nav.menu ul li.bouton:hover a{
+    background-color: red;
+    color: white;
+}
+
+body{
+    background: url(https://cdn.discordapp.com/attachments/1018825015422111744/1041707877427069039/bfi7u2yry0zy.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+    color: #6477a7;
+    text-align: justify;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    color: #FFFF;
+    text-align: justify;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    color: #ffffff;
+    text-align: justify;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+    text-align: center;
+    position: relative;
+    top: 350px;
+
+
+}
+
+div {
+    text-align: center;
+    position: relative;
+    top: 0px;
+}
+.gif1 {
+    position: relative;
+    top: 0px;
+    right: 360px;
+    width: 50px;
+    height: 50px;
+    
+}
