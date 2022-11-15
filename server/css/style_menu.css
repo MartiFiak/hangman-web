@@ -1,7 +1,7 @@
 div#content div{
     display: inline-block;
     width: 48%; 
-    background-color: blue;
+
 }
 div#content div.leftbox{
 
@@ -11,16 +11,12 @@ div#content div.leftbox{
 div#content div.rightbox{
 
     vertical-align: top;
-    background-color: pink;
+
 }
 
 nav.menu ul li.bouton{
     list-style-type: none;
     display: inline-block;
-}
-
-ul {
-    background-color: aqua;
 }
 
 nav.menu ul li.bouton a{
@@ -29,7 +25,7 @@ nav.menu ul li.bouton a{
     text-decoration: none;
     padding: 0px 20px;
     display: block;
-    margin: 0 0px;
+    margin: 0px;
     transition: 1s all;
 }
 nav.menu ul li.bouton:hover a{
