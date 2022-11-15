@@ -8,7 +8,7 @@ import (
 	"text/template"
 )
 
-var dataList = hangmanweb.InitGame()
+var dataList []string
 
 type Hangman struct {
 	WordToFind string
@@ -20,28 +20,20 @@ type Hangman struct {
     Message    string
 }
 
-var data = Hangman{
-	WordToFind: dataList[0],
-	Attempts:   10,
-	LetterUsed: dataList[2],
-	Word:       dataList[1],
-	Input:      "",
-	Message:      "",
-}
+var data Hangman
 
 func main() {
-	http.HandleFunc("/", Handler)
+	http.HandleFunc("/", IndexHandler)
 
-	fs := http.FileServer(http.Dir("./"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	fs := http.FileServer(http.Dir("./css"))
+	http.Handle("/css/", http.StripPrefix("/css/", fs))
 
-	http.HandleFunc("/hangman", Handler)
+	http.HandleFunc("/hangman", GameHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
-func Handler(w http.ResponseWriter, r *http.Request) {
-
-	tmpl := template.Must(template.ParseFiles("index.html"))
+func GameHandler(w http.ResponseWriter, r *http.Request){
+	tmpl := template.Must(template.ParseFiles("game.html"))
 
 	switch r.Method {
 	case "POST": // Gestion d'erreur
@@ -60,17 +52,34 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				tmpl.Execute(w, data)
 				return
 			} else if dataList[0] == "Nop" {
-                tmpl.Execute(w, data)
+				tmpl.Execute(w, data)
 				return
 			} else {
 				data.Word = dataList[1]
-                data.Message = dataList[0]
-                tmpl.Execute(w, data)
+				data.Message = dataList[0]
+				tmpl.Execute(w, data)
 				return
-            }
+			}
 		}
 	default:
 		tmpl.Execute(w, data)
 	}
+}
 
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+
+	tmpl := template.Must(template.ParseFiles("index.html"))
+
+	dataList = hangmanweb.InitGame()
+
+	data = Hangman{
+		WordToFind: dataList[0],
+		Attempts:   10,
+		LetterUsed: dataList[2],
+		Word:       dataList[1],
+		Input:      "",
+		Message:      "",
+	}
+
+	tmpl.Execute(w, data)
 }

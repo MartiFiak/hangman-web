@@ -3,17 +3,16 @@ package hangmanweb
 import (
 	hc "hangmanweb/hangman-classic/fonctions"
 	"math/rand"
-	"time"
 	"strconv"
-	"fmt"
+	"time"
 )
 
 const (
 	WordsFile = "../hangman-classic/assets/words.txt"
 )
 
-func InitGame() []string{
-	
+func InitGame() []string {
+
 	rand.Seed(time.Now().UnixNano())
 	wordToFind := hc.ReplaceAccentMaj(hc.Read(WordsFile)[rand.Intn(hc.Len(hc.Read(WordsFile)))])
 
@@ -26,14 +25,13 @@ func InitGame() []string{
 
 	word, useLettre = hc.RandomReveal(hc.Len(hc.StringToSlice(wordToFind))/2-1, word, wordToFind)
 
-	return []string{wordToFind,word,hc.SliceToString(useLettre)}
+	return []string{wordToFind, word, hc.SliceToString(useLettre)}
 }
 
-func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, attempts int) []string{
+func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, attempts int) []string {
 	if hc.Len(hc.StringToSlice(input)) != 0 {
 		useLettreSlice := []string{}
 		word, vowelsCount, attempts, useLettreSlice, _ = hc.InputProcessing("easy", word, wordToFind, input, attempts, 0, hc.StringToSlice(useLettre), "")
-		fmt.Println(attempts)
 		if attempts <= 0 {
 			return []string{"Vous avez perdu", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}
 		}
