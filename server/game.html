@@ -7,28 +7,54 @@
     <title>HangmanWeb</title>
     <link rel="stylesheet" href="/css/gamestyle.css">
 </head>
-<body>
-    <div class="principal">
 
-        <h1 class="title">Hangman Web</h1>
-
-        <h1>{{ .Message}}</h1>
-
-        <h2 class="wordState">{{ .Word}}</h2>
-
-        {{ if eq (len .LetterUsed) 0 }}
-        <p>No letter used</p>
-        {{ else }}
-        <p class="letterUsed"> {{ .LetterUsed}}</p>
-        {{ end }}
-
-        <form action="/hangman" method="post">
-            <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word"/> <br>
-            <input class="buttonInput" type="submit" value="Valide Choice" />
-        </form>
-
+<header>
+    <div id="content">
+    <!--leftbox -->
+        <div class="leftbox">
+            <!-- Logo -->
+            <div class="logo">
+                <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
+            </div>
+        </div>
+    <!--rightbox-->
+        <div class="rightbox">
+        <!-- Menu de navigation -->
+                <nav class="menu">
+                    <ul>
+                        <li class="bouton"><a href="/">Home</a></li>
+                        <li class="bouton"><a href="/rules">Rules</a></li>
+                        <li class="bouton"><a href="/score">Scoreboard</a></li>
+                    </ul>
+                </nav>
+        </div> 
     </div>
+</header>
 
+<body>
+    <div class="sect1">
+        <div class="principal">
+
+            <h1 class="title">Hangman Web</h1>
+
+            <h1>{{ .Message}}</h1>
+
+            <h2 class="wordState">{{ .Word}}</h2>
+
+            {{ if eq (len .LetterUsed) 0 }}
+            <p>No letter used</p>
+            {{ else }}
+            <p class="letterUsed"> {{ .LetterUsed}}</p>
+            {{ end }}
+
+            <form action="/hangman" method="post">
+                <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word"/> <br>
+                <input class="buttonInput" type="submit" value="Valide Choice" />
+            </form>
+
+        </div>
+        <img class="bgbl" src="css/bgbl.png" alt="">
+    </div>
 </body>
 
 </html>

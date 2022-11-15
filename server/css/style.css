@@ -107,6 +107,10 @@ form {
     color: black;
 }
 
+.textInputBox::placeholder{
+    color: rgba(0, 0, 0, 0.5);
+}
+
 .buttonInput {
     border-radius: 50px;
     margin: 20px;
@@ -128,6 +132,7 @@ form {
 }
 
 .principal {
+    padding-right: 5vw;
     display: flex;
     flex-direction: column;
     justify-content: center;

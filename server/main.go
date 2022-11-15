@@ -22,6 +22,8 @@ type Hangman struct {
 
 var data Hangman
 
+var userName string
+
 func main() {
 	fs := http.FileServer(http.Dir("./css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
@@ -29,7 +31,14 @@ func main() {
 	
 	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/hangman", GameHandler)
+	http.HandleFunc("/rules", RulesHandler)
 	http.ListenAndServe(":8080", nil)
+}
+
+func RulesHandler(w http.ResponseWriter, r *http.Request){
+
+	tmpl := template.Must(template.ParseFiles("rules.html"))
+	tmpl.Execute(w, nil)
 }
 
 func GameHandler(w http.ResponseWriter, r *http.Request){
@@ -73,14 +82,31 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	dataList = hangmanweb.InitGame()
 
-	data = Hangman{
-		WordToFind: dataList[0],
-		Attempts:   10,
-		LetterUsed: dataList[2],
-		Word:       dataList[1],
-		Input:      "",
-		Message:      "",
+	switch r.Method {
+	case "POST":
+		if err := r.ParseForm(); err != nil {
+			fmt.Println(err)
+			return
+		} else {
+			input := r.Form.Get("usernameinput")
+			fmt.Println(input)
+			if hangmanweb.InputUsernameTreatment(input) {
+				userName = input
+
+				data = Hangman{
+					WordToFind: dataList[0],
+					Attempts:   10,
+					LetterUsed: dataList[2],
+					Word:       dataList[1],
+					Input:      "",
+					Message:      "",
+				}
+				tmpl.Execute(w, data)
+			}
+		}
+	default:
+		fmt.Println("Enter an username")
 	}
 
-	tmpl.Execute(w, data)
+	tmpl.Execute(w, nil)
 }

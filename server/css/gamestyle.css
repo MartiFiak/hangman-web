@@ -4,9 +4,83 @@
     margin: 0;
 }
 
+
+
+header {
+    position: absolute;
+    width: 100vw;
+}
+
+.logo {
+    margin: 10px 40px;
+}
+
+.gif1 {
+    position: relative;
+    width: 50px;
+    height: 50px; 
+}
+
+#content {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+div#content div{
+    display: flex;
+    width: 50vw;
+}
+
+.rightbox {
+    display: flex;
+    justify-content: end;
+    margin-right: 5vw;
+}
+
+nav.menu ul li.bouton{
+    list-style-type: none;
+    display: inline-block;
+}
+
+nav.menu ul li.bouton a{
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 5px;
+    padding: 20px;
+    transition: 1s all;
+}
+
+nav.menu ul li.bouton.current a{
+    font-weight: 600;
+}
+
+nav.menu ul li.bouton:hover a{
+    color: white;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
+}
+
+
+
+
+
+
+
+
 body {
     background-image: linear-gradient(#551343,#761A55, #A12050);
     margin: 0 auto;
+}
+
+
+.sect1 {
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
@@ -14,6 +88,7 @@ h1 {
   text-align: justify;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 5vh;
   }
 
 h2 {
@@ -23,6 +98,7 @@ h2 {
 }
 
 .wordState {
+    margin: 2vh;
     letter-spacing: 5px;
 }
 
@@ -54,6 +130,10 @@ form {
     color: black;
 }
 
+.textInputBox::placeholder{
+    color: rgba(0, 0, 0, 0.5);
+}
+
 .buttonInput {
     border-radius: 50px;
     margin: 20px;
@@ -75,4 +155,13 @@ form {
     margin: 0 auto;
     width: 75%;
     height: 100vh;
+}
+
+.bgbl {
+    position: absolute;
+    height: 75vh;
+    width: 75vh;
+    bottom: 0;
+    left: 0;
+    object-position: left bottom;
 }
