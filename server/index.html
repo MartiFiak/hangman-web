@@ -7,69 +7,59 @@
     <title>HangmanWeb</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    <div class="principal">
 
-        <h1 class="title">Hangman Web</h1>
-
-        <form action="/hangman" method="post">
-            <input class="buttonInput" type="submit" value="Start Game" />
-        </form>
-
+<header>
+    <div id="content">
+    <!--leftbox -->
+        <div class="leftbox">
+            <!-- Logo -->
+            <div class="logo">
+                <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
+            </div>
+        </div>
+    <!--rightbox-->
+        <div class="rightbox">
+        <!-- Menu de navigation -->
+                <nav class="menu">
+                    <ul>
+                        <li class="bouton current"><a href="/">Home</a></li>
+                        <li class="bouton"><a href="/rules">Rules</a></li>
+                        <li class="bouton"><a href="/score">Scoreboard</a></li>
+                    </ul>
+                </nav>
+        </div> 
     </div>
+</header>
 
+<body>
+    <div class="sect1">
+        <div class="content">
+            <div class="secondary">
+                <div class="content">
+                    <h2>Warning !</h2>
+                    <p>Santa Claus is caught by a horrible villain who wants to destroy Christmas.<br>
+                        He decided to have Santa Claus sentenced to hang.<br><br>
+                        <b>Will you succeed in saving Santa Claus from death by discovering the magic word allowing him to go home ?</b></p>
+                </div>
+            </div>
+            <div class="principal">
+        
+                <h1 class="title">Hangman Web</h1>
+                <h2>Welcome to Hangman Web</h2>
+                
+                <div class="sizeContent">
+                </div>
+
+                <form action="/hangman" method="post">
+                    <input class="textInputBox" type="text" placeholder="Enter Your name" />
+                    <input class="buttonInput" type="submit" value="Start Game" />
+                </form>
+        
+            </div>
+
+        </div>
+        <img class="bgbl" src="css/bgbl.png" alt="">
+    </div>
 </body>
-<<<<<<< HEAD
-=======
-<style>
-
-body{
-        background: url(https://cdn.discordapp.com/attachments/1018825015422111744/1041707877427069039/bfi7u2yry0zy.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        }
-
-    h1 {
-      color: #6477a7;
-      text-align: justify;
-      text-align: center;
-      font-family: Arial, Helvetica, sans-serif;
-      }
-    h2 {
-        color: #FFFF;
-        text-align: justify;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    p {
-        color: #ffffff;
-        text-align: justify; 
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    form {
-        text-align: center;
-        position: relative;
-        top: 380px;
-
-
-    }
-    div{
-        width: 50%;
-        border-radius: 10px;
-        width: 500px;
-        height: 600px;
-        margin: auto;
-        border: 5px solid #4b4650;
-        padding: 10px;
-        background-color: #37323B;
-        text-align: center;
-        text-align: justify;
-
-
-    }
-</style>
->>>>>>> 088061d97cd422e78012b9e883e35ed295a0967d
 
 </html>

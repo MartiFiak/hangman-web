@@ -23,20 +23,21 @@ type Hangman struct {
 var data Hangman
 
 func main() {
-	http.HandleFunc("/", IndexHandler)
-
 	fs := http.FileServer(http.Dir("./css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
 
+	
+	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/hangman", GameHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
 func GameHandler(w http.ResponseWriter, r *http.Request){
+
 	tmpl := template.Must(template.ParseFiles("game.html"))
 
 	switch r.Method {
-	case "POST": // Gestion d'erreur
+	case "POST":
 		if err := r.ParseForm(); err != nil {
 			fmt.Println(err)
 			return
