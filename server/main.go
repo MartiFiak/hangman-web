@@ -32,16 +32,21 @@ var data = Hangman{
 func main() {
 	http.HandleFunc("/", Handler)
 
-	fs := http.FileServer(http.Dir("./"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	fs := http.FileServer(http.Dir("./css"))
+	http.Handle("/css/", http.StripPrefix("/css/", fs))
 
-	http.HandleFunc("/hangman", Handler)
+	http.HandleFunc("/hangman", HandlerGame)
 	http.ListenAndServe(":8080", nil)
 }
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-
 	tmpl := template.Must(template.ParseFiles("index.html"))
+	tmpl.Execute(w, data)
+}
+
+func HandlerGame(w http.ResponseWriter, r *http.Request) {
+
+	tmpl := template.Must(template.ParseFiles("game.html"))
 
 	switch r.Method {
 	case "POST": // Gestion d'erreur

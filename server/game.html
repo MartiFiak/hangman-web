@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HangmanWeb</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="pincipal">
+
+        <h1>Hangman Web</h1>
+
+        <h1>{{ .Message}}</h1>
+
+        <h2>{{ .Word}}</h2>
+        <p> {{ .LetterUsed}}</p>
+        <form action="/game" method="post">
+            <input id="inputBox" name="input" type="text" />
+            <input type="submit" value="Entrer" />
+        </form>
+        
+            <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
+        
+    </div>
+
+</body>
+
+
+</html>

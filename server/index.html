@@ -6,88 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HangmanWeb</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style_menu.css">
 </head>
 
 <body>
-    <div class="pincipal">
 
-        <h1>Hangman Web</h1>
+    <!-- Haut de page -->
 
-        <h1>{{ .Message}}</h1>
+    <header>
+        <div id="content"">
+        
+        <!--leftbox -->
 
-        <h2>{{ .Word}}</h2>
-        <p> {{ .LetterUsed}}</p>
-        <form action="/hangman" method="post">
-            <input id="inputBox" name="input" type="text" />
-            <input type="submit" value="Entrer" />
-        </form>
-        <gif>
-            <img id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
-        </gif>
-    </div>
+            <div class="leftbox">
+                <!-- Logo -->
+                <div class="logo">
+                    <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
 
+                </div>
+            </div>
+
+
+        <!--rightbox-->
+            <div class="rightbox">
+
+            <!-- Menu de navigation -->
+                    <nav class="menu">
+                        <ul>
+                            <li class="bouton"><a href="/home">Home</a></li>
+                            <li class="bouton"><a href="/rules">Rules</a></li>
+                            <li class="bouton"><a href="/hangman">Start Game</a></li>
+                            <li class="bouton"><a href="/score">Score</a></li>
+                        </ul>
+                    </nav>
+            </div> 
+        </div>
+       
+    </header>
+
+
+    <!-- Bas de page -->
+
+    <footer>
+        <div class="pincipal">
+            <div class="logo">
+                <img src="/img/logo.png" alt="logo">
+            </div>
+            <div class="text">
+                <p>Hangman Web</p>
+                <p>© 2022</p>
+            </div>
+        </div>
+    </footer>
 </body>
-<style>
-    gif {
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        font-size: 0px;
-        height: 10%;
-        width: 10%;
-
-    }
-
-body{
-        background: url(https://cdn.discordapp.com/attachments/1018825015422111744/1041707877427069039/bfi7u2yry0zy.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        }
-
-    h1 {
-        color: #6477a7;
-        text-align: justify;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    h2 {
-        color: #FFFF;
-        text-align: justify;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    p {
-        color: #ffffff;
-        text-align: justify;
-        text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    form {
-        text-align: center;
-        position: relative;
-        top: 350px;
-
-
-    }
-
-    div {
-
-        width: 500px;
-        height: 1000px;
-        margin: auto;
-        border: 5px solid #4b4650;
-        padding: 10px;
-        background-color: #37323B;
-        text-align: center;
-        text-align: justify;
-
-
-    }
-</style>
-
-</html>
