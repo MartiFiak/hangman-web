@@ -122,7 +122,7 @@ form {
 }
 
 .buttonInput:hover{
-    background-color: #20022B;
+    background-color: #312f32a3;
 }
 
 .sect1 {
@@ -254,4 +254,8 @@ form {
 
 .hidden {
     display: none;
+}
+
+.button-label:hover{
+    background-color: #312f32a3;
 }
