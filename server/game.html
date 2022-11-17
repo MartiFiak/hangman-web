@@ -42,6 +42,8 @@
 
             <h2 class="wordState">{{ .Word}}</h2>
 
+            {{ .Attempts}}
+
             {{ if eq (len .LetterUsed) 0 }}
             <p>No letter used</p>
             {{ else }}
@@ -49,7 +51,7 @@
             {{ end }}
 
             <form method="post">
-                <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word"/>
+                <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word" autofocus/>
                 <input class="buttonInput" type="submit" value="Valide Choice" />
             </form>
 

@@ -63,14 +63,16 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 				tmpl.Execute(w, data)
 				return
 			} else {
+				data.Attempts = attempts
+				data.LetterUsed = dataList[4]
 				data.Word = dataList[1]
+				data.Input = input
 				data.Message = dataList[0]
 				tmpl.Execute(w, data)
 				return
 			}
 		}
 	default:
-		fmt.Println(r.Method)
 		tmpl.Execute(w, data)
 	}
 }
@@ -81,13 +83,11 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "POST":
-		fmt.Println("Hey Post")
 		if err := r.ParseForm(); err != nil {
 			fmt.Println(err)
 			return
 		} else {
 			input := r.FormValue("input")
-			fmt.Println(input)
 			if hangmanweb.InputUsernameTreatment(input) {
 				dataList = hangmanweb.InitGame()
 				data = Hangman{
