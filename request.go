@@ -43,3 +43,7 @@ func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, atte
 		return []string{"Nop", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), useLettre}
 	}
 }
+
+func InputUsernameTreatment(input string) bool{
+	return hc.Len(hc.StringToSlice(input)) != 0
+}
