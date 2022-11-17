@@ -7,17 +7,17 @@ import (
 	"time"
 )
 
-var WordsFile = "../hangman-classic/assets/words.txt"
+var WordsFile = "./hangman-classic/assets/words.txt"
 
 func InitGame(mode string) []string {
 
 	switch mode {
-	case "easy" :
-		WordsFile = "../hangman-classic/assets/words.txt"
-	case "medium" :
-		WordsFile = "../hangman-classic/assets/words2.txt"
-	case "hard" :
-		WordsFile = "../hangman-classic/assets/words3.txt"
+	case "easy":
+		WordsFile = "./hangman-classic/assets/words.txt"
+	case "medium":
+		WordsFile = "./hangman-classic/assets/words2.txt"
+	case "hard":
+		WordsFile = "./hangman-classic/assets/words3.txt"
 	}
 
 	rand.Seed(time.Now().UnixNano())

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HangmanWeb</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./server/css/style.css">
 </head>
 
 <header>
@@ -22,7 +22,7 @@
         <!-- Menu de navigation -->
                 <nav class="menu">
                     <ul>
-                        <li class="bouton current"><a href="/">Home</a></li>
+                        <li class="bouton current"><a href="/home">Home</a></li>
                         <li class="bouton"><a href="/rules">Rules</a></li>
                         <li class="bouton"><a href="/score">Scoreboard</a></li>
                     </ul>
@@ -50,7 +50,7 @@
                 <div class="sizeContent">
                 </div>
 
-                <form action="/" method="post" autocomplete="off">
+                <form action="/home" method="post" autocomplete="off">
                     <input class="textInputBox" name="input" type="text", placeholder="Enter Your name" autofocus/>
                     <input class="buttonInput" type="submit" value="Start Game" />
                     <!-- Boutons de difficultés -->
@@ -67,7 +67,7 @@
             </div>
 
         </div>
-        <img class="bgbl" src="css/bgbl.png" alt="">
+        <img class="bgbl" src="./server/images/background/bgbl.png" alt="">
     </div>
 </body>
 
