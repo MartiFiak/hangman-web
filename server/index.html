@@ -50,16 +50,16 @@
                 <div class="sizeContent">
                 </div>
 
-                <form action="/" method="post">
+                <form action="/" method="post" autocomplete="off">
                     <input class="textInputBox" name="input" type="text", placeholder="Enter Your name" autofocus/>
                     <input class="buttonInput" type="submit" value="Start Game" />
                     <!-- Boutons de difficultés -->
                     <div class="radiogroup">
-                        <input type="radio" name="accept-offers" id="easy-button" class="hidden radio-label" checked)/>
+                        <input type="radio" name="difficulty" id="easy-button" class="hidden radio-label" value="easy" checked/>
                         <label for="easy-button" class="button-label">Easy</label>
-                        <input type="radio" name="accept-offers" id="medium-button" class="hidden radio-label")/>
+                        <input type="radio" name="difficulty" id="medium-button" class="hidden radio-label" value="medium")/>
                         <label for="medium-button" class="button-label">Normal</label>
-                        <input type="radio" name="accept-offers" id="hard-button" class="hidden radio-label")/>
+                        <input type="radio" name="difficulty" id="hard-button" class="hidden radio-label" value="hard")/>
                         <label for="hard-button" class="button-label">Hard</label>
                     </div>
                 </form>

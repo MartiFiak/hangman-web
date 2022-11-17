@@ -7,11 +7,18 @@ import (
 	"time"
 )
 
-const (
-	WordsFile = "../hangman-classic/assets/words.txt"
-)
+var WordsFile = "../hangman-classic/assets/words.txt"
 
-func InitGame() []string {
+func InitGame(mode string) []string {
+
+	switch mode {
+	case "easy" :
+		WordsFile = "../hangman-classic/assets/words.txt"
+	case "medium" :
+		WordsFile = "../hangman-classic/assets/words2.txt"
+	case "hard" :
+		WordsFile = "../hangman-classic/assets/words3.txt"
+	}
 
 	rand.Seed(time.Now().UnixNano())
 	wordToFind := hc.ReplaceAccentMaj(hc.Read(WordsFile)[rand.Intn(hc.Len(hc.Read(WordsFile)))])
@@ -44,6 +51,6 @@ func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, atte
 	}
 }
 
-func InputUsernameTreatment(input string) bool{
+func InputUsernameTreatment(input string) bool {
 	return hc.Len(hc.StringToSlice(input)) != 0
 }

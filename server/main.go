@@ -13,12 +13,12 @@ var dataList []string
 type Hangman struct {
 	PlayerName string
 	WordToFind string
-	MaVariable string
 	Attempts   int
 	LetterUsed string
 	Word       string
 	Input      string
 	Message    string
+	Mode	   string
 }
 
 var data Hangman
@@ -87,9 +87,11 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 			return
 		} else {
+			difficulty := r.Form.Get("difficulty")
 			input := r.FormValue("input")
 			if hangmanweb.InputUsernameTreatment(input) {
-				dataList = hangmanweb.InitGame()
+				
+				dataList = hangmanweb.InitGame(difficulty)
 				data = Hangman{
 					PlayerName: input,
 					WordToFind: dataList[0],
@@ -98,6 +100,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 					Word:       dataList[1],
 					Input:      "",
 					Message:    "",
+					Mode:		difficulty,
 				}
 				http.Redirect(w, r, "/hangman", http.StatusFound)
 				return

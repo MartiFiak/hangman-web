@@ -35,14 +35,12 @@
 <body>
     <div class="sect1">
         <div class="principal">
-
-            <h1 class="title">Hangman Web</h1>
-
+            
             <h1>{{ .Message}}</h1>
 
             <h2 class="wordState">{{ .Word}}</h2>
 
-            {{ .Attempts}}
+            <p>{{ .Mode}}</p>
 
             {{ if eq (len .LetterUsed) 0 }}
             <p>No letter used</p>
@@ -50,12 +48,13 @@
             <p class="letterUsed"> {{ .LetterUsed}}</p>
             {{ end }}
 
-            <form method="post">
+            <form method="post" autocomplete="off">
                 <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word" autofocus/>
                 <input class="buttonInput" type="submit" value="Valide Choice" />
             </form>
 
         </div>
+        <h1 class="attempts">{{ .Attempts}}</h1>
         <img class="bgbl" src="css/bgbl.png" alt="">
     </div>
 </body>
