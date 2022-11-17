@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HangmanWeb</title>
-    <link rel="stylesheet" href="/css/style_menu.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
+<header>
+    <div id="content">
+    <!--leftbox -->
+        <div class="leftbox">
+            <!-- Logo -->
+            <div class="logo">
+                <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
+            </div>
+        </div>
+    <!--rightbox-->
+        <div class="rightbox">
+        <!-- Menu de navigation -->
+                <nav class="menu">
+                    <ul>
+                        <li class="bouton current"><a href="/">Home</a></li>
+                        <li class="bouton"><a href="/rules">Rules</a></li>
+                        <li class="bouton"><a href="/score">Scoreboard</a></li>
+                    </ul>
+                </nav>
+        </div> 
+    </div>
+</header>
+
 <body>
-
-    <!-- Haut de page -->
-
-    <header>
-        <div id="content"">
-        
-        <!--leftbox -->
-
-            <div class="leftbox">
-                <!-- Logo -->
-                <div class="logo">
-                    <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
-
+    <div class="sect1">
+        <div class="content">
+            <div class="secondary">
+                <div class="content">
+                    <h2>Warning !</h2>
+                    <p>Santa Claus is caught by a horrible villain who wants to destroy Christmas.<br>
+                        He decided to have Santa Claus sentenced to hang.<br><br>
+                        <b>Will you succeed in saving Santa Claus from death by discovering the magic word allowing him to go home ?</b></p>
                 </div>
             </div>
+            <div class="principal">
+        
+                <h1 class="title">Hangman Web</h1>
+                <h2>Welcome to Hangman Web</h2>
+                
+                <div class="sizeContent">
+                </div>
 
-
-        <!--rightbox-->
-            <div class="rightbox">
-
-            <!-- Menu de navigation -->
-                    <nav class="menu">
-                        <ul>
-                            <li class="bouton"><a href="/home">Home</a></li>
-                            <li class="bouton"><a href="/rules">Rules</a></li>
-                            <li class="bouton"><a href="/hangman">Start Game</a></li>
-                            <li class="bouton"><a href="/score">Score</a></li>
-                        </ul>
-                    </nav>
-            </div> 
-        </div>
-       
-    </header>
-
-
-    <!-- Bas de page -->
-
-    <footer>
-        <div class="pincipal">
-            <div class="logo">
-                <img src="/img/logo.png" alt="logo">
+                <form action="/hangman" method="post">
+                    <input class="textInputBox" type="text" placeholder="Enter Your name" />
+                    <input class="buttonInput" type="submit" value="Start Game" />
+                </form>
+        
             </div>
-            <div class="text">
-                <p>Hangman Web</p>
-                <p>© 2022</p>
-            </div>
+
         </div>
-    </footer>
+        <img class="bgbl" src="css/bgbl.png" alt="">
+    </div>
 </body>
+
+</html>

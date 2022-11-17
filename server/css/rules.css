@@ -62,16 +62,6 @@ nav.menu ul li.bouton:hover a{
     border-style: solid;
 }
 
-
-
-
-
-
-
-
-
-
-
 body {
     background-image: linear-gradient(#551343,#761A55, #A12050);
     margin: 0 auto;
@@ -88,89 +78,40 @@ h2 {
     text-align: center;
     font-weight: lighter;
 }
+h3 {
+    color: black;
+    text-align: center;
+    font-weight: lighter;
+}
 
 form {
     text-align: center;
     position: relative;
 }
 
-.textInputBox {
-    background-color: rgba(255, 255, 255, 0.25);
-    margin: 10px;
-    border-radius: 50px;
-    width: 50%;
-    height: 50px;
-    border-width: 1px;
-    border-style: solid;
-    padding-left: 20px;
-    margin: 20px;
-    color: black;
-}
-
-.buttonInput {
-    border-radius: 50px;
-    margin: 20px;
-    width: 50%;
-    height: 50px;
-    border: none;
-    color: white;
-    background-color: #5C0F40;
-}
-
-.buttonInput:hover{
-    background-color: #20022B;
-}
 
 .sect1 {
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.principal {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 0 auto;
-    width: 40vw;
-}
-
-.secondary {
-    width: 60vw;
     height: 100vh;
-    display: flex;
+    width: 100vw;
     flex-direction: column;
     justify-content: center;
-}
 
-.secondary .content {
-    margin-left: 10vw;
+}
+.sect1 .content {
     display: flex;
     flex-direction: column;
-    width: 22vw;
+    align-items: center;
+    padding-top: 100px;
+
+}
+.sect1 .règles {
+    margin:1vh 10vw;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
     height: 40vh;
     background-color: rgba(255, 255, 255, 0.151);
 }
-
-.secondary .content h2 {
-    margin: 40px;
-}
-
-.secondary .content p {
-    margin-left: 40px;
-    margin-right: 40px;
-}
-
-.content {
-    display: flex;
-    flex-direction: row;
-    width: 100vw;    
-}
-
-.sizeContent {
-    height: 15vh;
-}
-
 .bgbl {
     position: absolute;
     height: 75vh;
