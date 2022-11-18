@@ -1,5 +1,5 @@
 * {
-    color: white;
+    color: rgba(255, 255, 255, 0.88);
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     z-index: 1;
@@ -15,10 +15,10 @@ header {
     margin: 10px 40px;
 }
 
-.gif1 {
+.logo1 {
     position: relative;
-    width: 50px;
-    height: 50px; 
+    width: 75px;
+    height: 75px; 
 }
 
 #content {
@@ -58,9 +58,9 @@ nav.menu ul li.bouton.current a{
 }
 
 nav.menu ul li.bouton:hover a{
-    color: white;
+    color: rgba(255, 255, 255, 0.687);
     border-width: 1px;
-    border-color: white;
+    border-color: rgba(255, 255, 255, 0.687);
     border-style: solid;
 }
 
@@ -70,13 +70,13 @@ body {
 }
 
 h1 {
-  color: #a1529d;
+  color: #de3d7b;
   text-align: center;
   font-size: 80px;
 }
 
 h2 {
-    color: #87807a;
+    color: #d6c3d9;
     text-align: center;
     font-weight: lighter;
 }
@@ -92,11 +92,16 @@ form {
     border-radius: 50px;
     width: 50%;
     height: 50px;
-    border-width: 1px;
+    border-width: 2px;
     border-style: solid;
+    border-color: rgba(98, 98, 98, 0.25);
     padding-left: 20px;
     margin: 20px;
-    color: black;
+    color: rgba(0, 0, 0, 0.61);
+}
+
+.textInputBox:focus {
+    outline: none;
 }
 
 .textInputBox::placeholder{
@@ -114,7 +119,7 @@ form {
 }
 
 .buttonInput:hover{
-    background-color: #20022B;
+    background-color: #20022ba4;
 }
 
 .sect1 {

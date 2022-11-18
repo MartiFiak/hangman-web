@@ -55,9 +55,9 @@ func InputProcessing(mode, word, wordToFind, input string, attempts, vowelsCount
 			}
 			return word, -100, attempts, useLettre, message
 		} else if input == wordToFind{
-			if  mode != "psEasy" && mode != "psMedium" && mode != "psHard" {
+			/*if  mode != "psEasy" && mode != "psMedium" && mode != "psHard" {
 				EndScreen(attempts, wordToFind)
-			}
+			}*/
 			return word, -100, attempts, useLettre, message
 		} else {
 			return word, vowelsCount, attempts - 2, useLettre, message

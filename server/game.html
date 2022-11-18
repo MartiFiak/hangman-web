@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HangmanWeb</title>
-    <link rel="stylesheet" href="/css/gamestyle.css">
+    <link rel="stylesheet" href="./server/css/gamestyle.css">
+    <link rel="icon" type="image/x-icon" href="./server/images/logo/logo2.png">
 </head>
 
 <header>
@@ -14,7 +15,7 @@
         <div class="leftbox">
             <!-- Logo -->
             <div class="logo">
-                <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
+                <img class="logo1" id="home" src="./server/images/logo/logo2.png">
                 <p>{{ .PlayerName}}</p>
             </div>
         </div>
@@ -23,9 +24,9 @@
         <!-- Menu de navigation -->
                 <nav class="menu">
                     <ul>
-                        <li class="bouton"><a href="/">Home</a></li>
+                        <li class="bouton"><a href="/home">Home</a></li>
                         <li class="bouton"><a href="/rules">Rules</a></li>
-                        <li class="bouton"><a href="/score">Scoreboard</a></li>
+                        <li class="bouton"><a href="/scoreboard">Scoreboard</a></li>
                     </ul>
                 </nav>
         </div> 
@@ -35,14 +36,12 @@
 <body>
     <div class="sect1">
         <div class="principal">
-
-            <h1 class="title">Hangman Web</h1>
-
+            
             <h1>{{ .Message}}</h1>
 
-            <h2 class="wordState">{{ .Word}}</h2>
+            <div class="spacer"></div>
 
-            {{ .Attempts}}
+            <h2 class="wordState">{{ .Word}}</h2>
 
             {{ if eq (len .LetterUsed) 0 }}
             <p>No letter used</p>
@@ -50,13 +49,15 @@
             <p class="letterUsed"> {{ .LetterUsed}}</p>
             {{ end }}
 
-            <form method="post">
+            <form action="/hangman" method="post" autocomplete="off">
                 <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word" autofocus/>
                 <input class="buttonInput" type="submit" value="Valide Choice" />
             </form>
 
         </div>
-        <img class="bgbl" src="css/bgbl.png" alt="">
+        <h1 class="attempts">{{ .Attempts}}</h1>
+        <img class="bgbl" src="./server/images/background/bgbl.png" alt="">
+        <img src="./server/images/hangmanstep/attempts{{ .Attempts}}.png" class="hangman-display" alt="">
     </div>
 </body>
 

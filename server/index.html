@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HangmanWeb</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./server/css/style.css">
+    <link rel="icon" type="image/x-icon" href="./server/images/logo/logo2.png">
 </head>
 
 <header>
@@ -14,7 +15,7 @@
         <div class="leftbox">
             <!-- Logo -->
             <div class="logo">
-                <img class="gif1" id="home" src="https://media.tenor.com/k9OJ7QV0TiUAAAAC/scared-toad.gif">
+                <img class="logo1" id="home" src="./server/images/logo/logo2.png">
             </div>
         </div>
     <!--rightbox-->
@@ -22,7 +23,7 @@
         <!-- Menu de navigation -->
                 <nav class="menu">
                     <ul>
-                        <li class="bouton current"><a href="/">Home</a></li>
+                        <li class="bouton current"><a href="/home">Home</a></li>
                         <li class="bouton"><a href="/rules">Rules</a></li>
                         <li class="bouton"><a href="/scoreboard">Scoreboard</a></li>
                     </ul>
@@ -50,16 +51,16 @@
                 <div class="sizeContent">
                 </div>
 
-                <form action="/" method="post">
+                <form action="/home" method="post" autocomplete="off">
                     <input class="textInputBox" name="input" type="text", placeholder="Enter Your name" autofocus/>
                     <input class="buttonInput" type="submit" value="Start Game" />
                     <!-- Boutons de difficultés -->
                     <div class="radiogroup">
-                        <input type="radio" name="accept-offers" id="easy-button" class="hidden radio-label" checked)/>
+                        <input type="radio" name="difficulty" id="easy-button" class="hidden radio-label" value="easy" checked/>
                         <label for="easy-button" class="button-label">Easy</label>
-                        <input type="radio" name="accept-offers" id="medium-button" class="hidden radio-label")/>
+                        <input type="radio" name="difficulty" id="medium-button" class="hidden radio-label" value="medium")/>
                         <label for="medium-button" class="button-label">Normal</label>
-                        <input type="radio" name="accept-offers" id="hard-button" class="hidden radio-label")/>
+                        <input type="radio" name="difficulty" id="hard-button" class="hidden radio-label" value="hard")/>
                         <label for="hard-button" class="button-label">Hard</label>
                     </div>
                 </form>
@@ -67,7 +68,7 @@
             </div>
 
         </div>
-        <img class="bgbl" src="css/bgbl.png" alt="">
+        <img class="bgbl" src="./server/images/background/bgbl.png" alt="">
     </div>
 </body>
 
