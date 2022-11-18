@@ -31,9 +31,15 @@ func main() {
 	http.HandleFunc("/", GameHandler)
 	http.HandleFunc("/hangman", GameInputHandler)
 	http.HandleFunc("/rules", RulesHandler)
+	http.HandleFunc("/scoreboard", ScoreHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
+func ScoreHandler(w http.ResponseWriter, r *http.Request) {
+
+	tmpl := template.Must(template.ParseFiles("./server/scoreboard.html"))
+	tmpl.Execute(w, data)
+}
 func StartGame(input, difficulty string) {
 	dataList = hangmanweb.InitGame(difficulty)
 	data = Hangman{
