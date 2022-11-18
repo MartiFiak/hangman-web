@@ -29,8 +29,15 @@ func main() {
 
 	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/hangman", GameHandler)
+	http.HandleFunc("/scoreboard", ScoreHandler)
 	http.HandleFunc("/rules", RulesHandler)
 	http.ListenAndServe(":8080", nil)
+}
+
+func ScoreHandler(w http.ResponseWriter, r *http.Request) {
+
+	tmpl := template.Must(template.ParseFiles("scoreboard.html"))
+	tmpl.Execute(w, data)
 }
 
 func RulesHandler(w http.ResponseWriter, r *http.Request) {
