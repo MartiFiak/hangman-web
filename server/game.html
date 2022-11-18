@@ -36,8 +36,27 @@
 <body>
     <div class="sect1">
         <div class="principal">
-            
-            <h1>{{ .Message}}</h1>
+
+            {{ if eq (len .Message) 4 }} 
+            {{ else }}
+            <div class="endpage">
+                <div class="content">
+                    <h1> {{ if eq .Message "WinPage"}}Congratulations you saved Santa Claus !{{else}}Oh no santa is dead !{{end}}</h1>
+
+                    {{ if eq .Message "LoosePage"}}
+                    <p>The magic word was "{{.WordToFind}}".</p>
+                    {{end}}
+                    <p> {{ if eq .Message "WinPage"}}
+                        Thanks to you this winter many children will be able to receive their Christmas presents.<br>
+                        And I think you'll get a particularly big one.{{else}}Don't worry, it doesn't matter, he's not really dead since Santa Claus doesn't exist.{{end}}</p>
+
+                        <form action="/hangman" method="post">
+                            <input class="restartbtn" type="submit" value="Restart" name="endscreeninput">
+                            <input id="leavebtn" type="submit" value="Leave" name="endscreeninput">
+                        </form>
+                </div>
+            </div>
+            {{ end }}
 
             <div class="spacer"></div>
 
@@ -50,8 +69,8 @@
             {{ end }}
 
             <form action="/hangman" method="post" autocomplete="off">
-                <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word" autofocus/>
-                <input class="buttonInput" type="submit" value="Valide Choice" />
+                <input class="textInputBox" name="input" type="text", placeholder="Enter letter or word" autofocus {{ if eq (len .Message) 4 }} {{ else }} disabled {{ end }}/>
+                <input class="buttonInput" type="submit" value="Valide Choice" {{ if eq (len .Message) 4 }} {{ else }} disabled {{ end }}/>
             </form>
 
         </div>

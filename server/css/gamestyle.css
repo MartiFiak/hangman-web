@@ -14,14 +14,72 @@ header {
     z-index: 2;
 }
 
+.endpage {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 75vh;
+    width: 75vw;
+    background-color: rgba(255, 255, 255, 0.2);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    backdrop-filter: blur(10px);
+}
+
+.endpage h1 {
+    text-align: center;
+    font-size: 50px;
+    margin: 25px;
+}
+
+.endpage .content {
+    margin: 50px;
+}
+
+.endpage form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.endpage input[type="submit"] {
+    border-radius: 50px;
+    margin: 5px auto;
+    width: 25%;
+    height: 50px;
+    border: none;
+    color: white;
+    background-color: #5C0F40;
+}
+
+.endpage input[type="submit"]:hover {
+    background-color: #20022ba4;
+}
+
+#leavebtn {
+    border-radius: 50px;
+    margin: 5px auto;
+    width: 25%;
+    height: 50px;
+    border: none;
+    color: white;
+    background-color: #811459;
+}
+
+#leavebtn:hover {
+    background-color: #661047;
+}
+
 .logo {
-    margin: 10px 40px;
+    margin: 30px 40px;
 }
 
 .logo1 {
     position: relative;
-    width: 75px;
-    height: 75px; 
+    width: 70px;
+    height: 70px; 
 }
 
 #content {

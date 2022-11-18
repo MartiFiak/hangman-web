@@ -34,8 +34,21 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
-func RulesHandler(w http.ResponseWriter, r *http.Request) {
+func StartGame(input, difficulty string) {
+	dataList = hangmanweb.InitGame(difficulty)
+	data = Hangman{
+		PlayerName: input,
+		WordToFind: dataList[0],
+		Attempts:   10,
+		LetterUsed: dataList[2],
+		Word:       dataList[1],
+		Input:      "",
+		Message:    "Okey",
+		Mode:       difficulty,
+	}
+}
 
+func RulesHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("./server/rules.html"))
 	tmpl.Execute(w, nil)
 }
@@ -47,6 +60,14 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println(err)
 			return
 		} else {
+			endscreeninput := r.Form.Get("endscreeninput")
+			switch endscreeninput {
+			case "Restart":
+				StartGame(data.PlayerName, data.Mode)
+				http.Redirect(w, r, "/hangman", http.StatusFound)
+			case "Leave":
+				http.Redirect(w, r, "/home", http.StatusFound)
+			}
 			input := r.Form.Get("input")
 			dataList = hangmanweb.InputTreatment(data.Word, data.WordToFind, input, data.LetterUsed, 0, data.Attempts)
 			attempts, _ := strconv.Atoi(dataList[3])
@@ -57,16 +78,16 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 				data.Input = input
 				http.Redirect(w, r, "/", http.StatusFound)
 				return
-			} else if dataList[0] == "Nop" {
+			} else if dataList[0] == "Nope" {
 				http.Redirect(w, r, "/", http.StatusFound)
 				return
 			} else {
+				attempts, _ := strconv.Atoi(dataList[3])
 				data.Attempts = attempts
 				data.LetterUsed = dataList[4]
 				data.Word = dataList[1]
 				data.Input = input
 				data.Message = dataList[0]
-				// Page de fin
 				http.Redirect(w, r, "/", http.StatusFound)
 				return
 			}
@@ -133,18 +154,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 			difficulty := r.Form.Get("difficulty")
 			input := r.FormValue("input")
 			if hangmanweb.InputUsernameTreatment(input) {
-
-				dataList = hangmanweb.InitGame(difficulty)
-				data = Hangman{
-					PlayerName: input,
-					WordToFind: dataList[0],
-					Attempts:   10,
-					LetterUsed: dataList[2],
-					Word:       dataList[1],
-					Input:      "",
-					Message:    "",
-					Mode:       difficulty,
-				}
+				StartGame(input, difficulty)
 				http.Redirect(w, r, "/hangman", http.StatusFound)
 				return
 			}

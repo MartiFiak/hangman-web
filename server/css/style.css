@@ -12,13 +12,13 @@ header {
 }
 
 .logo {
-    margin: 10px 40px;
+    margin: 30px 40px;
 }
 
 .logo1 {
     position: relative;
-    width: 75px;
-    height: 75px; 
+    width: 70px;
+    height: 70px; 
 }
 
 #content {

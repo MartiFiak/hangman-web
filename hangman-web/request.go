@@ -40,14 +40,17 @@ func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, atte
 		useLettreSlice := []string{}
 		word, vowelsCount, attempts, useLettreSlice, _ = hc.InputProcessing("easy", word, wordToFind, input, attempts, 0, hc.StringToSlice(useLettre), "")
 		if attempts <= 0 {
-			return []string{"Vous avez perdu", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}
+			if attempts < 0 {
+				attempts = 0
+			}
+			return []string{"LoosePage", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}
 		}
 		if input == wordToFind || word == wordToFind {
-			return []string{"Vous avez gagné", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}
+			return []string{"WinPage", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}
 		}
 		return []string{"Okey", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}
 	} else {
-		return []string{"Nop", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), useLettre}
+		return []string{"Nope", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), useLettre}
 	}
 }
 
