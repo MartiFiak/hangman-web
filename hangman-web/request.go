@@ -38,14 +38,14 @@ func InitGame(mode string) []string {
 func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, attempts int) []string {
 	if hc.Len(hc.StringToSlice(input)) != 0 {
 		useLettreSlice := []string{}
-		word, vowelsCount, attempts, useLettreSlice, _ = hc.InputProcessing("easy", word, wordToFind, input, attempts, 0, hc.StringToSlice(useLettre), "")
+		word, vowelsCount, attempts, useLettreSlice, _ = hc.InputProcessing("easy", word, wordToFind, hc.ReplaceAccentMaj(input), attempts, 0, hc.StringToSlice(useLettre), "")
 		if attempts <= 0 {
 			if attempts < 0 {
 				attempts = 0
 			}
 			return []string{"LoosePage", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}
 		}
-		if input == wordToFind || word == wordToFind {
+		if hc.ReplaceAccentMaj(input) == wordToFind || word == wordToFind {
 			return []string{"WinPage", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}
 		}
 		return []string{"Okey", word, strconv.Itoa(vowelsCount), strconv.Itoa(attempts), hc.SliceToString(useLettreSlice)}

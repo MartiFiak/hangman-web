@@ -13,22 +13,19 @@ header {
 
 .logo {
     margin: 30px 40px;
-}
-
-.logo1 {
     position: relative;
     width: 70px;
     height: 70px; 
 }
 
-#content {
+.content {
     flex-direction: row;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
-div#content div{
+.content div{
     display: flex;
     width: 50vw;
 }
@@ -80,18 +77,17 @@ h2 {
     text-align: center;
     font-weight: lighter;
 }
+
+
 h3 {
-    color: black;
-    text-align: center;
-    font-weight: lighter;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-form {
-    text-align: center;
-    position: relative;
+p {
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
-
-
 .sect1 {
     height: 100vh;
     width: 100vw;
@@ -100,22 +96,21 @@ form {
 
 }
 .sect1 .content {
-
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 100px;
+    padding-bottom: 50px;
 
 }
-.sect1 .règles {
-
-    margin:1vh 10vw;
+.sect1 .regles {
+    margin: 0 10vw;
     display: flex;
     flex-direction: column;
     padding: 50px;
-    height: 40vh;
     background-color: rgba(255, 255, 255, 0.151);
 }
+
 .bgbl {
     z-index: -1;
     position: absolute;

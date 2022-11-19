@@ -1,10 +1,7 @@
 package hangman
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
-	"strconv"
 )
 
 func RequestLetterWord() string {
@@ -27,37 +24,7 @@ func InputProcessing(mode, word, wordToFind, input string, attempts, vowelsCount
 	Output: Returns modified values ​​after handling user input
 	*/
 	if Len(StringToSlice(input)) > 1 {
-		if input == "stop" {
-			if _, err := os.Stat("assets/save.txt"); err == nil && (mode != "psEasy" && mode != "psMedium" && mode != "psHard"){
-				fmt.Println("WARNING : Save was found !\nCreate a new save delete the oldone.\nContinue ? [y/n]")
-				reponse := RequestLetterWord()
-				if reponse == "y" {
-					err = os.Remove("assets/save.txt")
-					if err != nil {
-						fmt.Println("Erreur lors de la suppression de la sauvegarde.")
-					}
-				} else {
-					return word, -100, attempts, useLettre, message
-				}
-			}
-			file, err := os.OpenFile("assets/save.txt", os.O_CREATE|os.O_WRONLY, 0600)
-			defer file.Close()
-			if err != nil {
-				panic(err)
-			}
-			saveData, err := json.Marshal([]string{mode, word, wordToFind, strconv.Itoa(attempts), SliceToString(useLettre)})
-			if err != nil {
-				panic(err)
-			}
-			_, err = file.Write(saveData)
-			if err != nil {
-				panic(err)
-			}
-			return word, -100, attempts, useLettre, message
-		} else if input == wordToFind{
-			/*if  mode != "psEasy" && mode != "psMedium" && mode != "psHard" {
-				EndScreen(attempts, wordToFind)
-			}*/
+		if input == wordToFind{
 			return word, -100, attempts, useLettre, message
 		} else {
 			return word, vowelsCount, attempts - 2, useLettre, message
