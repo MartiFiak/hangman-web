@@ -36,18 +36,22 @@ header {
 
 .endpage .content {
     margin: 50px;
+    position: relative;
+    height: 100%;
 }
 
 .endpage form {
+    position: absolute;
     display: flex;
+    bottom: 0;
     flex-direction: column;
-    margin: 20px;
+    width: 100%;
 }
 
 .endpage input[type="submit"] {
     border-radius: 50px;
     margin: 5px auto;
-    width: 25%;
+    width: 35%;
     height: 50px;
     border: none;
     color: white;
@@ -55,21 +59,15 @@ header {
 }
 
 .endpage input[type="submit"]:hover {
-    background-color: #20022ba4;
+    background-color: #460f31;
 }
 
 #leavebtn {
-    border-radius: 50px;
-    margin: 5px auto;
-    width: 25%;
-    height: 50px;
-    border: none;
-    color: white;
-    background-color: #811459;
+    background-color: #20022bef;
 }
 
 #leavebtn:hover {
-    background-color: #661047;
+    background-color: #16021def;
 }
 
 .logo {

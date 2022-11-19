@@ -44,14 +44,14 @@
                     <h1> {{ if eq .Message "WinPage"}}Congratulations you saved Santa Claus !{{else}}Oh no santa is dead !{{end}}</h1>
 
                     {{ if eq .Message "LoosePage"}}
-                    <p>The magic word was "{{.WordToFind}}".</p>
+                    <p>The magic word was <b>"{{.WordToFind}}"</b>.</p>
                     {{end}}
                     <p> {{ if eq .Message "WinPage"}}
                         Thanks to you this winter many children will be able to receive their Christmas presents.<br>
                         And I think you'll get a particularly big one.{{else}}Don't worry, it doesn't matter, he's not really dead since Santa Claus doesn't exist.{{end}}</p>
 
                         <form action="/hangman" method="post">
-                            <input class="restartbtn" type="submit" value="Restart" name="endscreeninput">
+                            <input id="restartbtn" type="submit" value="Restart" name="endscreeninput">
                             <input id="leavebtn" type="submit" value="Leave" name="endscreeninput">
                         </form>
                 </div>
