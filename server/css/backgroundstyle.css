@@ -62,5 +62,5 @@ body {
     bottom: 0;
     left: 0;
     object-position: left bottom;
-    z-index: 0;
+    z-index: -2;
 }
