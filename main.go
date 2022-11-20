@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 	"text/template"
+	"strings"
 )
 
 var dataList []string
@@ -133,6 +134,16 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
 
+
+
+	ips := r.Header.Get("X-Forwarded-For")
+	splitIps := strings.Split(ips, ",")
+
+	fmt.Println(splitIps)
+
+
+
+	
 	switch r.Method {
 	case "POST":
 		if err := r.ParseForm(); err != nil {
