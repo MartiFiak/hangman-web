@@ -3,12 +3,10 @@ package main
 import (
 	"fmt"
 	hangmanweb "hangmanweb/hangman-web"
-	hc "hangmanweb/hangman-classic/fonctions"
 	"net/http"
 	"os"
 	"strconv"
 	"text/template"
-	"strings"
 )
 
 var dataList []string
@@ -24,7 +22,7 @@ type Hangman struct {
 	Mode       string
 }
 
-var gameLaunch map[string]Hangman
+var gameLaunch = make(map[string]Hangman)
 
 var data Hangman
 
@@ -132,11 +130,9 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
 
-	
-
 	ips := r.Header.Get("X-Forwarded-For")
 	//splitIps := strings.Split(ips, ",")
-	gameLaunch[hc.SliceToString(strings.Split(r.Header.Get("X-Forwarded-For"), ","))] = Hangman{
+	gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
 		PlayerName: "unknown",
 		WordToFind: "",
 		Attempts:   10,
