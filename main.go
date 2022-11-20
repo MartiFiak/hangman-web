@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"text/template"
+	"os"
 )
 
 var dataList []string
@@ -24,6 +25,12 @@ type Hangman struct {
 var data Hangman
 
 func main() {
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		fmt.Println("$PORT must be set")
+	}
+
 	fs := http.FileServer(http.Dir("./server"))
 	http.Handle("/server/", http.StripPrefix("/server/", fs))
 
@@ -32,7 +39,7 @@ func main() {
 	http.HandleFunc("/hangman", GameInputHandler)
 	http.HandleFunc("/rules", RulesHandler)
 	http.HandleFunc("/scoreboard", ScoreHandler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":" + port, nil)
 }
 
 func ScoreHandler(w http.ResponseWriter, r *http.Request) {
