@@ -22,6 +22,8 @@ type Hangman struct {
 	Mode       string
 }
 
+var gameLaunch map[string]Hangman
+
 var data Hangman
 
 func main() {
@@ -46,7 +48,10 @@ func main() {
 func ScoreHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("./server/scoreboard.html"))
-	tmpl.Execute(w, data)
+
+	gameLaunch[data.PlayerName] = data
+
+	tmpl.Execute(w, gameLaunch[data.PlayerName])
 }
 func StartGame(input, difficulty string) {
 	dataList = hangmanweb.InitGame(difficulty)
@@ -115,11 +120,11 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 
 func GameHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("./server/game.html"))
-	if data.Mode != "easy" && data.Mode != "medium" && data.Mode != "hard" {
+	if gameLaunch[data.PlayerName].Mode != "easy" && gameLaunch[data.PlayerName].Mode != "medium" && gameLaunch[data.PlayerName].Mode != "hard" {
 		http.Redirect(w, r, "/home", http.StatusFound)
 		return
 	} else {
-		tmpl.Execute(w, data)
+		tmpl.Execute(w, gameLaunch[data.PlayerName])
 	}
 }
 
