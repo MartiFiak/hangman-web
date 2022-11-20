@@ -137,13 +137,13 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 
 	ips := r.Header.Get("X-Forwarded-For")
-	splitIps := strings.Split(ips, ",")
+	//splitIps := strings.Split(ips, ",")
 
-	fmt.Println(splitIps)
+	fmt.Println(ips)
 
 
 
-	
+
 	switch r.Method {
 	case "POST":
 		if err := r.ParseForm(); err != nil {

@@ -4,7 +4,6 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
-	"fmt"
 )
 
 func Clear(){
@@ -30,7 +29,6 @@ func Len(input []string)int{
 	Returns the length of the Slice returned based on the bone
 	Output :
 	*/
-	fmt.Println(runtime.GOOS)
 	if runtime.GOOS == "windows" {
         return len(input)
 	}else if runtime.GOOS == "linux" {
