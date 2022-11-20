@@ -130,7 +130,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
 
-	ips := r.Header.Get("X-Forwarded-For")
+	//ips := r.Header.Get("X-Forwarded-For")
 	//splitIps := strings.Split(ips, ",")
 	gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
 		PlayerName: "unknown",
