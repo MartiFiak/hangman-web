@@ -17,7 +17,7 @@ func RandomReveal(nb int, word string, wordToFind string) (string, []string) {
 	var useLettre []string
 	for i:= 0; i < nb; i++{
 		rand.Seed(time.Now().UnixNano())
-		random := rand.Intn(Len(StringToSlice(wordToFind))-1)
+		random := rand.Intn(Len(StringToSlice(wordToFind)))
 		isUse := false
 		for _, _lettre := range useLettre{
 			if _lettre == string(wordToFind[random]) {

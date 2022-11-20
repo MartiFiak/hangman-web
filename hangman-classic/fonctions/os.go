@@ -33,6 +33,8 @@ func Len(input []string)int{
 	fmt.Println(runtime.GOOS)
 	if runtime.GOOS == "windows" {
         return len(input)
+	}else if runtime.GOOS == "linux" {
+		return len(input)-1
 	}else {
         return len(input)+1
 	}
