@@ -120,6 +120,7 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 
 func GameHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("./server/game.html"))
+	fmt.Println(gameLaunch[data.PlayerName])
 	if gameLaunch[data.PlayerName].Mode != "easy" && gameLaunch[data.PlayerName].Mode != "medium" && gameLaunch[data.PlayerName].Mode != "hard" {
 		http.Redirect(w, r, "/home", http.StatusFound)
 		return
