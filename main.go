@@ -47,13 +47,10 @@ func main() {
 }
 
 func ScoreHandler(w http.ResponseWriter, r *http.Request) {
-
 	tmpl := template.Must(template.ParseFiles("./server/scoreboard.html"))
-
-	gameLaunch[data.PlayerName] = data
-
 	tmpl.Execute(w, gameLaunch[data.PlayerName])
 }
+
 func StartGame(input, difficulty string) {
 	dataList = hangmanweb.InitGame(difficulty)
 	data = Hangman{
@@ -134,12 +131,13 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
 
-
+	
+	gameLaunch[r.Header.Get("X-Forwarded-For")] = data
 
 	ips := r.Header.Get("X-Forwarded-For")
 	//splitIps := strings.Split(ips, ",")
 
-	fmt.Println(ips)
+	fmt.Println(gameLaunch[ips])
 
 
 
