@@ -143,7 +143,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		Mode:       "",
 	}
 
-	fmt.Println(gameLaunch[ips])
+	fmt.Println(gameLaunch)
 
 
 
