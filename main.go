@@ -28,7 +28,7 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		fmt.Println("$PORT must be set")
+		fmt.Println("Game lauch in localhost:8080")
 		port = "8080"
 	}
 
@@ -70,7 +70,6 @@ func RulesHandler(w http.ResponseWriter, r *http.Request) {
 func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
-		fmt.Println(r.Form.Get("input"))
 		if err := r.ParseForm(); err != nil {
 			fmt.Println(err)
 			return
@@ -84,6 +83,7 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, "/home", http.StatusFound)
 			}
 			input := r.Form.Get("input")
+			fmt.Println(input)
 			dataList = hangmanweb.InputTreatment(data.Word, data.WordToFind, input, data.LetterUsed, 0, data.Attempts)
 			attempts, _ := strconv.Atoi(dataList[3])
 			if dataList[0] == "Okey" {
