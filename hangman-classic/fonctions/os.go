@@ -32,7 +32,7 @@ func Len(input []string)int{
 	if runtime.GOOS == "windows" {
         return len(input)
 	}else {
-        return len(input)+1
+        return len(input)-1
 	}
 
 }
