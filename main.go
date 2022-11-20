@@ -4,9 +4,9 @@ import (
 	"fmt"
 	hangmanweb "hangmanweb/hangman-web"
 	"net/http"
+	"os"
 	"strconv"
 	"text/template"
-	"os"
 )
 
 var dataList []string
@@ -40,7 +40,7 @@ func main() {
 	http.HandleFunc("/hangman", GameInputHandler)
 	http.HandleFunc("/rules", RulesHandler)
 	http.HandleFunc("/scoreboard", ScoreHandler)
-	http.ListenAndServe(":" + port, nil)
+	http.ListenAndServe(":"+port, nil)
 }
 
 func ScoreHandler(w http.ResponseWriter, r *http.Request) {
@@ -121,39 +121,6 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		tmpl.Execute(w, data)
 	}
-	/*
-		switch r.Method {
-		case "POST":
-			if err := r.ParseForm(); err != nil {
-				fmt.Println(err)
-				return
-			} else {
-				input := r.Form.Get("input")
-				dataList = hangmanweb.InputTreatment(data.Word, data.WordToFind, input, data.LetterUsed, 0, data.Attempts)
-				attempts, _ := strconv.Atoi(dataList[3])
-				if dataList[0] == "Okey" {
-					data.Attempts = attempts
-					data.LetterUsed = dataList[4]
-					data.Word = dataList[1]
-					data.Input = input
-					tmpl.Execute(w, data)
-					return
-				} else if dataList[0] == "Nop" {
-					tmpl.Execute(w, data)
-					return
-				} else {
-					data.Attempts = attempts
-					data.LetterUsed = dataList[4]
-					data.Word = dataList[1]
-					data.Input = input
-					data.Message = dataList[0]
-					tmpl.Execute(w, data)
-					return
-				}
-			}
-		default:
-			tmpl.Execute(w, data)
-		}*/
 }
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {

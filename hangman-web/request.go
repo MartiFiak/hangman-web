@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"strconv"
 	"time"
+	"fmt"
 )
 
 var WordsFile = "./hangman-classic/assets/words.txt"
@@ -37,6 +38,7 @@ func InitGame(mode string) []string {
 
 func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, attempts int) []string {
 	if hc.Len(hc.StringToSlice(input)) != 0 {
+		fmt.Println(hc.Len(hc.StringToSlice(input)))            // Was add now
 		useLettreSlice := []string{}
 		word, vowelsCount, attempts, useLettreSlice, _ = hc.InputProcessing("easy", word, wordToFind, hc.ReplaceAccentMaj(input), attempts, 0, hc.StringToSlice(useLettre), "")
 		if attempts <= 0 {
