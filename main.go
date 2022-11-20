@@ -105,7 +105,9 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 				}
 
 				
-				fmt.Println(gameLaunch[r.Header.Get("X-Forwarded-For")])
+				fmt.Println(gameLaunch)
+
+
 				http.Redirect(w, r, "/", http.StatusFound)
 				return
 			} else if dataList[0] == "Nope" {
@@ -125,7 +127,7 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 					Mode:       gameLaunch[r.Header.Get("X-Forwarded-For")].Mode,
 				}
 				
-				fmt.Println(gameLaunch[r.Header.Get("X-Forwarded-For")])
+				fmt.Println(gameLaunch)
 				//gameLaunch[r.Header.Get("X-Forwarded-For")].Attempts = attempts
 				//gameLaunch[r.Header.Get("X-Forwarded-For")].LetterUsed = dataList[4]
 				//gameLaunch[r.Header.Get("X-Forwarded-For")].Word = dataList[1]
@@ -143,12 +145,14 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 
 func GameHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("./server/game.html"))
-	fmt.Println(gameLaunch[r.Header.Get("X-Forwarded-For")])
+
+	fmt.Println(gameLaunch)
+
 	if gameLaunch[r.Header.Get("X-Forwarded-For")].Mode != "easy" && gameLaunch[r.Header.Get("X-Forwarded-For")].Mode != "medium" && gameLaunch[r.Header.Get("X-Forwarded-For")].Mode != "hard" {
 		http.Redirect(w, r, "/home", http.StatusFound)
 		return
 	} else {
-		tmpl.Execute(w, gameLaunch[data.PlayerName])
+		tmpl.Execute(w, gameLaunch[r.Header.Get("X-Forwarded-For")])
 	}
 }
 
