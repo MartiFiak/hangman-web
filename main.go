@@ -29,6 +29,7 @@ func main() {
 
 	if port == "" {
 		fmt.Println("$PORT must be set")
+		port = "8080"
 	}
 
 	fs := http.FileServer(http.Dir("./server"))
@@ -69,7 +70,7 @@ func RulesHandler(w http.ResponseWriter, r *http.Request) {
 func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
-		fmt.Println(r.Form.Get("endscreeninput"))
+		fmt.Println(r.Form.Get("input"))
 		if err := r.ParseForm(); err != nil {
 			fmt.Println(err)
 			return
