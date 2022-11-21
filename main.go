@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	hangmanweb "hangmanweb/hangman-web"
+	hc "hangmanweb/hangman-classic/fonctions"
 	"net/http"
 	"os"
 	"strconv"
@@ -183,11 +184,11 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(macaddr)
+		fmt.Println(hc.SliceToString(macaddr))
 	}
 
 	gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
-		PlayerName: "unknown",
+		PlayerName: "hc.SliceToString(macaddr)",
 		WordToFind: "",
 		Attempts:   10,
 		LetterUsed: "",
