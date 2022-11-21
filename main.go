@@ -188,7 +188,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
-		PlayerName: "hc.SliceToString(macaddr)",
+		PlayerName: hc.SliceToString(macaddr),
 		WordToFind: "",
 		Attempts:   10,
 		LetterUsed: "",
