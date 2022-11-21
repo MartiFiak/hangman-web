@@ -3,12 +3,10 @@ package main
 import (
 	"fmt"
 	hangmanweb "hangmanweb/hangman-web"
-	hc "hangmanweb/hangman-classic/fonctions"
 	"net/http"
 	"os"
 	"strconv"
 	"text/template"
-	"net"
 )
 
 var dataList []string
@@ -25,8 +23,6 @@ type Hangman struct {
 }
 
 var gameLaunch = make(map[string]Hangman)
-
-var data Hangman
 
 func main() {
 	port := os.Getenv("PORT")
@@ -106,10 +102,6 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 					Mode:       gameLaunch[r.Header.Get("X-Forwarded-For")].Mode,
 				}
 
-				
-				fmt.Println(gameLaunch)
-
-
 				http.Redirect(w, r, "/", http.StatusFound)
 				return
 			} else if dataList[0] == "Nope" {
@@ -128,13 +120,7 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 					Message:    dataList[0],
 					Mode:       gameLaunch[r.Header.Get("X-Forwarded-For")].Mode,
 				}
-				
-				fmt.Println(gameLaunch)
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].Attempts = attempts
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].LetterUsed = dataList[4]
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].Word = dataList[1]
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].Input = input
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].Message = dataList[0]
+
 				http.Redirect(w, r, "/", http.StatusFound)
 				return
 			}
@@ -158,37 +144,12 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getMacAddr() ([]string, error) {
-    ifas, err := net.Interfaces()
-    if err != nil {
-        return nil, err
-    }
-    var as []string
-    for _, ifa := range ifas {
-        a := ifa.HardwareAddr.String()
-        if a != "" {
-            as = append(as, a)
-        }
-    }
-    return as, nil
-}
-
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
 
-	//ips := r.Header.Get("X-Forwarded-For")
-	//splitIps := strings.Split(ips, ",")
-
-	macaddr, err := getMacAddr()
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println(hc.SliceToString(macaddr))
-	}
-
 	gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
-		PlayerName: hc.SliceToString(macaddr),
+		PlayerName: "unknown",
 		WordToFind: "",
 		Attempts:   10,
 		LetterUsed: "",
@@ -197,11 +158,6 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		Message:    "",
 		Mode:       "",
 	}
-
-	fmt.Println(gameLaunch)
-
-
-
 
 	switch r.Method {
 	case "POST":
