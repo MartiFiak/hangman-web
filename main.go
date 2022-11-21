@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 	"text/template"
+	"net"
 )
 
 var dataList []string
@@ -156,12 +157,35 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func getMacAddr() ([]string, error) {
+    ifas, err := net.Interfaces()
+    if err != nil {
+        return nil, err
+    }
+    var as []string
+    for _, ifa := range ifas {
+        a := ifa.HardwareAddr.String()
+        if a != "" {
+            as = append(as, a)
+        }
+    }
+    return as, nil
+}
+
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
 
 	//ips := r.Header.Get("X-Forwarded-For")
 	//splitIps := strings.Split(ips, ",")
+
+	macaddr, err := getMacAddr()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(macaddr)
+	}
+
 	gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
 		PlayerName: "unknown",
 		WordToFind: "",
