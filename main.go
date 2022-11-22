@@ -98,6 +98,7 @@ func RulesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GameInputHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(gameLaunch)
 	switch r.Method {
 	case "POST":
 		if err := r.ParseForm(); err != nil {
