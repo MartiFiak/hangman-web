@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 	"text/template"
+	"math/rand"
 )
 
 var dataList []string
@@ -41,6 +42,35 @@ func main() {
 	http.HandleFunc("/rules", RulesHandler)
 	http.HandleFunc("/scoreboard", ScoreHandler)
 	http.ListenAndServe(":"+port, nil)
+
+}
+
+func ContaintKey(key string, _map map[string]Hangman) bool{
+	if _, isPresent := _map[key]; isPresent {
+		return true
+	}
+	return false
+}
+
+func CookieSession(w http.ResponseWriter, r *http.Request) string {
+
+	cookies, err := r.Cookie("session_token")
+
+	if err != nil {
+		token := rand.Intn(1000000000)
+		if !ContaintKey(strconv.Itoa(token), gameLaunch) {
+			http.SetCookie(w, &http.Cookie{
+				Name: "session_token",
+				Value: strconv.Itoa(token),
+			})
+			return strconv.Itoa(token)
+		} else {
+			return CookieSession(w, r)
+		}
+	} else {
+		return cookies.Value
+	}
+
 }
 
 func ScoreHandler(w http.ResponseWriter, r *http.Request) {
@@ -48,9 +78,9 @@ func ScoreHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, nil)
 }
 
-func StartGame(input, difficulty string,  r *http.Request) {
+func StartGame(input, difficulty string,w http.ResponseWriter, r *http.Request) {
 	dataList = hangmanweb.InitGame(difficulty)
-	gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
+	gameLaunch[CookieSession(w,r)] = Hangman{
 		PlayerName: input,
 		WordToFind: dataList[0],
 		Attempts:   10,
@@ -77,29 +107,25 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 			endscreeninput := r.Form.Get("endscreeninput")
 			switch endscreeninput {
 			case "Restart":
-				StartGame(gameLaunch[r.Header.Get("X-Forwarded-For")].PlayerName, gameLaunch[r.Header.Get("X-Forwarded-For")].Mode, r)
+				StartGame(gameLaunch[CookieSession(w,r)].PlayerName, gameLaunch[CookieSession(w,r)].Mode, w, r)
 				http.Redirect(w, r, "/hangman", http.StatusFound)
 			case "Leave":
 				http.Redirect(w, r, "/home", http.StatusFound)
 			}
 			input := r.Form.Get("input")
-			dataList = hangmanweb.InputTreatment(gameLaunch[r.Header.Get("X-Forwarded-For")].Word, gameLaunch[r.Header.Get("X-Forwarded-For")].WordToFind, input, gameLaunch[r.Header.Get("X-Forwarded-For")].LetterUsed, 0, gameLaunch[r.Header.Get("X-Forwarded-For")].Attempts)
+			dataList = hangmanweb.InputTreatment(gameLaunch[CookieSession(w,r)].Word, gameLaunch[CookieSession(w,r)].WordToFind, input, gameLaunch[CookieSession(w,r)].LetterUsed, 0, gameLaunch[CookieSession(w,r)].Attempts)
 			attempts, _ := strconv.Atoi(dataList[3])
 			if dataList[0] == "Okey" {
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].Attempts = attempts
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].LetterUsed = dataList[4]
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].Word = dataList[1]
-				//gameLaunch[r.Header.Get("X-Forwarded-For")].Input = input
 
-				gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
-					PlayerName: gameLaunch[r.Header.Get("X-Forwarded-For")].PlayerName,
-					WordToFind: gameLaunch[r.Header.Get("X-Forwarded-For")].WordToFind,
+				gameLaunch[CookieSession(w,r)] = Hangman{
+					PlayerName: gameLaunch[CookieSession(w,r)].PlayerName,
+					WordToFind: gameLaunch[CookieSession(w,r)].WordToFind,
 					Attempts:   attempts,
 					LetterUsed: dataList[4],
 					Word:       dataList[1],
 					Input:      input,
-					Message:    gameLaunch[r.Header.Get("X-Forwarded-For")].Message,
-					Mode:       gameLaunch[r.Header.Get("X-Forwarded-For")].Mode,
+					Message:    gameLaunch[CookieSession(w,r)].Message,
+					Mode:       gameLaunch[CookieSession(w,r)].Mode,
 				}
 
 				http.Redirect(w, r, "/", http.StatusFound)
@@ -110,15 +136,15 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 			} else {
 				attempts, _ := strconv.Atoi(dataList[3])
 
-				gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
-					PlayerName: gameLaunch[r.Header.Get("X-Forwarded-For")].PlayerName,
-					WordToFind: gameLaunch[r.Header.Get("X-Forwarded-For")].WordToFind,
+				gameLaunch[CookieSession(w, r)] = Hangman{
+					PlayerName: gameLaunch[CookieSession(w,r)].PlayerName,
+					WordToFind: gameLaunch[CookieSession(w,r)].WordToFind,
 					Attempts:   attempts,
 					LetterUsed: dataList[4],
 					Word:       dataList[1],
 					Input:      input,
 					Message:    dataList[0],
-					Mode:       gameLaunch[r.Header.Get("X-Forwarded-For")].Mode,
+					Mode:       gameLaunch[CookieSession(w,r)].Mode,
 				}
 
 				http.Redirect(w, r, "/", http.StatusFound)
@@ -136,19 +162,21 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println(gameLaunch)
 
-	if gameLaunch[r.Header.Get("X-Forwarded-For")].Mode != "easy" && gameLaunch[r.Header.Get("X-Forwarded-For")].Mode != "medium" && gameLaunch[r.Header.Get("X-Forwarded-For")].Mode != "hard" {
+	if gameLaunch[CookieSession(w,r)].Mode != "easy" && gameLaunch[CookieSession(w,r)].Mode != "medium" && gameLaunch[CookieSession(w,r)].Mode != "hard" {
 		http.Redirect(w, r, "/home", http.StatusFound)
 		return
 	} else {
-		tmpl.Execute(w, gameLaunch[r.Header.Get("X-Forwarded-For")])
+		tmpl.Execute(w, gameLaunch[CookieSession(w,r)])
 	}
 }
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
+	CookieSession(w,r)
+
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
 
-	gameLaunch[r.Header.Get("X-Forwarded-For")] = Hangman{
+	gameLaunch[CookieSession(w,r)] = Hangman{
 		PlayerName: "unknown",
 		WordToFind: "",
 		Attempts:   10,
@@ -168,7 +196,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 			difficulty := r.Form.Get("difficulty")
 			input := r.FormValue("input")
 			if hangmanweb.InputUsernameTreatment(input) {
-				StartGame(input, difficulty, r)
+				StartGame(input, difficulty, w, r)
 				http.Redirect(w, r, "/hangman", http.StatusFound)
 				return
 			}
