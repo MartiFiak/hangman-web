@@ -7,6 +7,7 @@
     <title>HangmanWeb</title>
     <link rel="stylesheet" href="./server/css/scoreboard.css">
     <link rel="stylesheet" href="./server/css/backgroundstyle.css">
+    <link rel="stylesheet" href="./server/css/headerstyle.css">
     <link rel="icon" type="image/x-icon" href="./server/images/logo/logo2.png">
 </head>
 
@@ -40,27 +41,20 @@
             <div class="header item">
                 <p>#</p>
                 <p>Name</p>
-                <p>Words found</p>
-                <p>Difficulty</p>
+                <p>Save</p>
+                <p>Dead</p>
+                <p>Total</p>
             </div>
+
+            {{ range .UsersList }}
             <div class="item">                     
-                <p>1</p>
-                <p>Leo</p>
-                <p>25</p>
-                <p>Hard</p>
+                <p>Placement</p>
+                <p>{{ .Username}}</p>
+                <p>{{ .Win}}</p>
+                <p>{{ .Loose}}</p>
+                <p>{{ .GamePlay}}</p>
             </div>
-            <div class="item">
-                <p>2</p>
-                <p>Alexy</p>
-                <p>22</p>
-                <p>Easy</p>
-            </div>
-            <div class="item">
-                <p>3</p>
-                <p>Marine</p>
-                <p>16</p>
-                <p>Normal</p>
-            </div>
+            {{ end }}
         </div>
     </div>
     <img class="slide-tl" src="./server/images/background/santaclaus.png" alt="">

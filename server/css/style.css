@@ -3,65 +3,7 @@
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     z-index: 1;
-}
-
-header {
-    position: absolute;
-    width: 100vw;
-    z-index: 2;
-}
-
-.logo {
-    margin: 30px 40px;
-}
-
-.logo1 {
-    position: relative;
-    width: 70px;
-    height: 70px; 
-}
-
-#content {
-    flex-direction: row;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-div#content div{
-    display: flex;
-    width: 50vw;
-}
-
-.rightbox {
-    display: flex;
-    justify-content: end;
-    margin-right: 5vw;
-}
-
-nav.menu ul li.bouton{
-    list-style-type: none;
-    display: inline-block;
-}
-
-nav.menu ul li.bouton a{
-    color: white;
-    text-decoration: none;
-    display: block;
-    margin: 5px;
-    padding: 20px;
-    transition: 1s all;
-}
-
-nav.menu ul li.bouton.current a{
-    font-weight: 600;
-}
-
-nav.menu ul li.bouton:hover a{
-    color: rgba(255, 255, 255, 0.687);
-    border-width: 1px;
-    border-color: rgba(255, 255, 255, 0.687);
-    border-style: solid;
+    user-select: none;
 }
 
 body {
@@ -74,6 +16,10 @@ h1 {
   color: #de3d7b;
   text-align: center;
   font-size: 80px;
+}
+
+.title {
+    text-align: center;
 }
 
 h2 {
@@ -137,13 +83,44 @@ form {
     width: 40vw;
 }
 
+
 .secondary {
     width: 60vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    visibility: visible;
 }
+
+@media screen and (max-width:1240px) {   
+    .secondary {
+        display: none;
+    }
+
+    .principal {
+        width: 50%;
+    }
+    /*768px for mobil*/
+    .content {
+        justify-content: center;
+    }
+
+    progress {
+        visibility: hidden;
+    }
+
+    input[type="text"]{
+        min-width: 280px;
+    }
+    input[type="password"]{
+        min-width: 280px;
+    }
+    input[type="submit"]{
+        min-width: 260px;
+    }
+}
+
 
 .secondary .content {
     margin-left: 10vw;
@@ -168,7 +145,6 @@ form {
     display: flex;
     flex-direction: row;
     width: 100vw;
-    user-select: none;
 }
 
 .sizeContent {

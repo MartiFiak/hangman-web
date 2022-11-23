@@ -13,6 +13,19 @@ import (
 
 var dataList []string
 
+type User struct {
+	Username	string
+	Win			int
+	Loose		int
+	GamePlay	int
+}
+
+type ScoreboardData struct {
+	UsersList 	[]User
+}
+
+var sbUsersList ScoreboardData
+
 type Hangman struct {
 	PlayerName string
 	WordToFind string
@@ -93,6 +106,50 @@ func InitGlobalValue(){
 	} else {
 		globaldata.Ratio = 50
 	}
+}
+
+func UpdateUserValue(win bool, w http.ResponseWriter, r *http.Request){
+	userDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDONLY|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	csvReaderUsersDB := csv.NewReader(userDatabase)
+	getDataUsersDB, err := csvReaderUsersDB.ReadAll()
+
+	sbUsersList.UsersList = []User{}
+
+	if len(getDataUsersDB) != 0 {
+		for ligne, userIngetData := range getDataUsersDB {
+			if userIngetData[0] == gameLaunch[CookieSession(w,r)].PlayerName {
+				if win {
+					sbUsersList.UsersList = append(sbUsersList.UsersList, User{userIngetData[0],AtoiWithoutErr(userIngetData[2])+1,AtoiWithoutErr(userIngetData[3]),AtoiWithoutErr(userIngetData[4])+1})
+					getDataUsersDB[ligne][2] = strconv.Itoa(AtoiWithoutErr(getDataUsersDB[ligne][2])+1)
+					getDataUsersDB[ligne][4] = strconv.Itoa(AtoiWithoutErr(getDataUsersDB[ligne][4])+1)
+				} else {
+					sbUsersList.UsersList = append(sbUsersList.UsersList, User{userIngetData[0],AtoiWithoutErr(userIngetData[2]),AtoiWithoutErr(userIngetData[3])+1,AtoiWithoutErr(userIngetData[4])+1})
+					getDataUsersDB[ligne][3] = strconv.Itoa(AtoiWithoutErr(getDataUsersDB[ligne][3])+1)
+					getDataUsersDB[ligne][4] = strconv.Itoa(AtoiWithoutErr(getDataUsersDB[ligne][4])+1)
+				}
+			} else {
+				sbUsersList.UsersList = append(sbUsersList.UsersList, User{userIngetData[0],AtoiWithoutErr(userIngetData[2]),AtoiWithoutErr(userIngetData[3]),AtoiWithoutErr(userIngetData[4])})
+			}
+		}
+	}
+	userDatabase.Close()
+
+	userDatabase, err = os.OpenFile("./server/database/users.csv", os.O_WRONLY|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println(err)
+	}
+	
+	csvWriterUsersDB := csv.NewWriter(userDatabase) 
+
+	err = csvWriterUsersDB.WriteAll(getDataUsersDB)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer csvWriterUsersDB.Flush() 
 }
 
 func UpdateGlobalValue(save bool){
@@ -177,7 +234,59 @@ func CookieSession(w http.ResponseWriter, r *http.Request) string {
 
 func ScoreHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("./server/scoreboard.html"))
-	tmpl.Execute(w, nil)
+
+	//Lecture de la base user
+	usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer usersDatabase.Close()
+
+	csvReaderUsersDB := csv.NewReader(usersDatabase)
+	getDataUsersDB, err := csvReaderUsersDB.ReadAll()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	sbUsersList.UsersList = []User{}
+
+	if len(getDataUsersDB) != 0 {
+		for _, userIngetData := range getDataUsersDB {
+			sbUsersList.UsersList = append(sbUsersList.UsersList, User{userIngetData[0],AtoiWithoutErr(userIngetData[2]),AtoiWithoutErr(userIngetData[3]),AtoiWithoutErr(userIngetData[4])})
+		}
+	}
+	// Tri des données        rang basé sur win*ratio
+
+	for i := 0; i < len(sbUsersList.UsersList); i++ {
+		for j := i; j < len(sbUsersList.UsersList); j++ {
+			var iratio int
+			var jratio int
+			if sbUsersList.UsersList[i].GamePlay != 0 {
+				iratio = sbUsersList.UsersList[i].Win*(sbUsersList.UsersList[i].Win*100/(sbUsersList.UsersList[i].GamePlay))
+			} else {
+				iratio = 1
+			}
+			if sbUsersList.UsersList[j].GamePlay != 0 {
+				jratio = sbUsersList.UsersList[j].Win*(sbUsersList.UsersList[j].Win*100/(sbUsersList.UsersList[j].GamePlay))
+			} else {
+				jratio = 1
+			}
+
+			if  jratio > iratio {
+				sbUsersList.UsersList[i], sbUsersList.UsersList[j] = sbUsersList.UsersList[j], sbUsersList.UsersList[i]
+			}
+		}
+	}
+
+	// Penser a actualisé le scoarboard
+
+	tmpl.Execute(w, sbUsersList)
+}
+
+func AtoiWithoutErr(str string) int {
+	inte, _ := strconv.Atoi(str)
+	return inte
 }
 
 func StartGame(input, difficulty string,w http.ResponseWriter, r *http.Request) {
@@ -252,8 +361,10 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 				switch dataList[0]{
 				case "WinPage":
 					UpdateGlobalValue(true)
+					UpdateUserValue(true, w, r)
 				case "LoosePage":
 					UpdateGlobalValue(false)
+					UpdateUserValue(false, w, r)
 				}
 
 				http.Redirect(w, r, "/", http.StatusFound)

@@ -1,5 +1,7 @@
 body {
     overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
 @keyframes slide-tl {
@@ -51,6 +53,10 @@ body {
 
 .star2{
     animation: myAnim 6s ease 1s infinite normal backwards;
+}
+
+embed {
+    visibility: hidden;
 }
 
 
