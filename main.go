@@ -90,6 +90,8 @@ func InitGlobalValue(){
 
 	if globaldata.SaveSanta+globaldata.DeadSanta != 0 {
 		globaldata.Ratio = globaldata.SaveSanta*100/(globaldata.SaveSanta+globaldata.DeadSanta)
+	} else {
+		globaldata.Ratio = 50
 	}
 }
 
@@ -139,6 +141,8 @@ func UpdateGlobalValue(save bool){
 
 	if globaldata.SaveSanta+globaldata.DeadSanta != 0 {
 		globaldata.Ratio = globaldata.SaveSanta*100/(globaldata.SaveSanta+globaldata.DeadSanta)
+	} else {
+		globaldata.Ratio = 50
 	}
 
 }
