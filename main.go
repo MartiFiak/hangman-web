@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"text/template"
 	"math/rand"
+	"encoding/csv"
 )
 
 var dataList []string
@@ -22,6 +23,14 @@ type Hangman struct {
 	Message    string
 	Mode       string
 }
+
+type GlobalInfo struct {
+	DeadSanta	int
+	SaveSanta	int
+	Ratio		int
+}
+
+var globaldata GlobalInfo
 
 var gameLaunch = make(map[string]Hangman)
 
@@ -42,6 +51,95 @@ func main() {
 	http.HandleFunc("/rules", RulesHandler)
 	http.HandleFunc("/scoreboard", ScoreHandler)
 	http.ListenAndServe(":"+port, nil)
+
+}
+
+func InitGlobalValue(){
+	
+	globalDatabase, err := os.OpenFile("./server/database/global.csv", os.O_RDWR|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println(err)
+	}
+	
+	defer globalDatabase.Close()
+
+	csvReaderGlobalDB := csv.NewReader(globalDatabase)
+	getDataGlobalDB, err := csvReaderGlobalDB.ReadAll()
+
+	if err != nil {
+		fmt.Println(err)
+	}
+	
+	if len(getDataGlobalDB) != 0 {
+		globaldata.DeadSanta, _ = strconv.Atoi(getDataGlobalDB[0][0])
+		globaldata.SaveSanta, _ = strconv.Atoi(getDataGlobalDB[0][1])
+	} else {
+
+		csvWriterGlobalDB := csv.NewWriter(globalDatabase) 
+
+		newData := []string{"0","0"}
+		err = csvWriterGlobalDB.Write(newData)
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer csvWriterGlobalDB.Flush() 
+		
+		globaldata.DeadSanta = 0
+		globaldata.SaveSanta = 0
+	}
+
+	if globaldata.SaveSanta+globaldata.DeadSanta != 0 {
+		globaldata.Ratio = globaldata.SaveSanta*100/(globaldata.SaveSanta+globaldata.DeadSanta)
+	}
+}
+
+func UpdateGlobalValue(save bool){
+
+	globalDatabase, err := os.OpenFile("./server/database/global.csv", os.O_RDONLY|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	csvReaderGlobalDB := csv.NewReader(globalDatabase)
+	getDataGlobalDB, err := csvReaderGlobalDB.ReadAll()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	
+	if len(getDataGlobalDB) != 0 {
+		globaldata.DeadSanta, _ = strconv.Atoi(getDataGlobalDB[0][0])
+		globaldata.SaveSanta, _ = strconv.Atoi(getDataGlobalDB[0][1])
+		fmt.Println(globaldata)
+	} else {
+		globaldata.DeadSanta = 0
+		globaldata.SaveSanta = 0
+	}
+	globalDatabase.Close()
+
+	globalDatabase, err = os.OpenFile("./server/database/global.csv", os.O_WRONLY|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println(err)
+	}
+	
+	csvWriterGlobalDB := csv.NewWriter(globalDatabase) 
+
+	if save {
+		globaldata.SaveSanta ++
+	} else {
+		globaldata.DeadSanta ++
+	}
+
+	newData := []string{strconv.Itoa(globaldata.DeadSanta), strconv.Itoa(globaldata.SaveSanta)}
+	err = csvWriterGlobalDB.Write(newData)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer csvWriterGlobalDB.Flush() 
+
+	if globaldata.SaveSanta+globaldata.DeadSanta != 0 {
+		globaldata.Ratio = globaldata.SaveSanta*100/(globaldata.SaveSanta+globaldata.DeadSanta)
+	}
 
 }
 
@@ -98,7 +196,6 @@ func RulesHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func GameInputHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(gameLaunch)
 	switch r.Method {
 	case "POST":
 		if err := r.ParseForm(); err != nil {
@@ -148,6 +245,13 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 					Mode:       gameLaunch[CookieSession(w,r)].Mode,
 				}
 
+				switch dataList[0]{
+				case "WinPage":
+					UpdateGlobalValue(true)
+				case "LoosePage":
+					UpdateGlobalValue(false)
+				}
+
 				http.Redirect(w, r, "/", http.StatusFound)
 				return
 			}
@@ -173,6 +277,7 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
+	InitGlobalValue()
 	CookieSession(w,r)
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
@@ -196,7 +301,8 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		} else {
 			difficulty := r.Form.Get("difficulty")
 			input := r.FormValue("input")
-			if hangmanweb.InputUsernameTreatment(input) {
+			password := r.FormValue("password")
+			if hangmanweb.InputUsernameTreatment(input, password) {
 				StartGame(input, difficulty, w, r)
 				http.Redirect(w, r, "/hangman", http.StatusFound)
 				return
@@ -204,6 +310,6 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	default:
 	}
-	tmpl.Execute(w, nil)
+	tmpl.Execute(w, globaldata)
 
 }

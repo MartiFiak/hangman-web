@@ -54,6 +54,7 @@
 
                 <form action="/home" method="post" autocomplete="off">
                     <input class="textInputBox" name="input" type="text", placeholder="Enter Your name" autofocus/>
+                    <input class="textInputBox" name="password" type="password", placeholder="Enter Your password" autofocus/>
                     <input class="buttonInput" type="submit" value="Start Game" />
                     <!-- Boutons de difficultés -->
                     <div class="radiogroup">
@@ -67,7 +68,7 @@
                 </form>
 
             </div>
-
+            <progress value="{{ .Ratio}}" max="100" class="saveprogressionbar"></progress>
         </div>
         <img class="slide-tl" src="./server/images/background/santaclaus.png" alt="">
         <img class="bgbl" src="./server/images/background/bgbl.png" alt="">
