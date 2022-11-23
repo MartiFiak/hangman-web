@@ -41,6 +41,7 @@ type GlobalInfo struct {
 	DeadSanta	int
 	SaveSanta	int
 	Ratio		int
+	Total		int
 }
 
 var globaldata GlobalInfo
@@ -106,6 +107,8 @@ func InitGlobalValue(){
 	} else {
 		globaldata.Ratio = 50
 	}
+
+	globaldata.Total = globaldata.DeadSanta + globaldata.SaveSanta
 }
 
 func UpdateUserValue(win bool, w http.ResponseWriter, r *http.Request){
@@ -201,6 +204,8 @@ func UpdateGlobalValue(save bool){
 	} else {
 		globaldata.Ratio = 50
 	}
+
+	globaldata.Total = globaldata.DeadSanta + globaldata.SaveSanta
 
 }
 

@@ -106,8 +106,8 @@ form {
         justify-content: center;
     }
 
-    progress {
-        visibility: hidden;
+    .saveprogression {
+        display: none;
     }
 
     input[type="text"]{
@@ -220,7 +220,7 @@ form {
     background-color: #312f32a3;
 }
 
-.saveprogressionbar {
+.saveprogression {
     position: fixed;
     width: 10vw;
     height: 2vh;
@@ -229,4 +229,23 @@ form {
     right: 50%;
     transform: translate(-50%, -50%);
     object-position: center;
+}
+
+.saveprogressionbar {
+    width: 10vw;
+    height: 2vh;
+    background-color: #551343;
+    border-radius: 1vh;
+}
+
+.saveprogressiontitle {
+    font-size: 0.8em;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.progression {
+    background-image: linear-gradient(to right,#741135,#741135bb,#7411357c);
+    height: 100%;
+    border-radius: 1vh;
 }
