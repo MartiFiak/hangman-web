@@ -104,6 +104,7 @@ form {
     /*768px for mobil*/
     .content {
         justify-content: center;
+        height: 100%;
     }
 
     .saveprogression {
