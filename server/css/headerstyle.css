@@ -57,3 +57,11 @@ nav.menu ul li.bouton:hover a{
     border-color: rgba(255, 255, 255, 0.687);
     border-style: solid;
 }
+
+embed {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+}
