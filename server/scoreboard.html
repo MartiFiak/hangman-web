@@ -40,22 +40,25 @@
         <h1 class="title">Scoreboard<br></h1>
         <div class="scoreboard">                         
             <div class="header item">
-                <p>#</p>
-                <p>Name</p>
-                <p>Save</p>
-                <p>Dead</p>
-                <p>Total</p>
+                <p class="itemsect">#</p>
+                <p class="itemsect">Name</p>
+                <p class="itemsect">Save</p>
+                <p class="itemsect">Dead</p>
+                <p class="itemsect">Total</p>
             </div>
 
-            {{ range .UsersList }}
-            <div class="item">                     
-                <p>Placement</p>
-                <p>{{ .Username}}</p>
-                <p>{{ .Win}}</p>
-                <p>{{ .Loose}}</p>
-                <p>{{ .GamePlay}}</p>
+            <div class="content">
+                {{ range $i, $a := .UsersList }}
+                <div class="item">                  
+                    <p class="itemsect">{{$i}}</p>
+                    <p class="itemsect">{{ .Username}}</p>
+                    <p class="itemsect">{{ .Win}}</p>
+                    <p class="itemsect">{{ .Loose}}</p>
+                    <p class="itemsect">{{ .GamePlay}}</p>
+                </div>
+                {{ end }}
+
             </div>
-            {{ end }}
         </div>
     </div>
     <img class="slide-tl" src="./server/images/background/santaclaus.png" alt="">

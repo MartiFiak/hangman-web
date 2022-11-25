@@ -11,27 +11,16 @@ body {
 }
 
 h1 {
-  color: #5B6D99;
-  text-align: center;
-  font-size: 80px;
-}
+    color: #de3d7b;
+    text-align: center;
+    font-size: 80px;
+  }
 
 h2 {
     color: #87807a;
     text-align: center;
     font-weight: lighter;
 }
-h3 {
-    color: black;
-    text-align: center;
-    font-weight: lighter;
-}
-
-form {
-    text-align: center;
-    position: relative;
-}
-
 
 .sect1 {
     height: 100vh;
@@ -40,23 +29,40 @@ form {
     justify-content: center;
 
 }
-.sect1  .title{
-
+.title{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 100px;
 
 }
-.sect1 .scoreboard {
 
-    margin:1vh 10vw;
+.scoreboard {
+    overflow-y: auto;
+    margin:5vh 10vw;
     display: flex;
     flex-direction: column;
     padding: 50px;
-    height: 40vh;
+    height: 50vh;
     background-color: rgba(255, 255, 255, 0.151);
     backdrop-filter: blur(10px);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.content::-webkit-scrollbar {
+    display: none;
+}
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+.content {
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.itemsect {
+    width: 20%;
+    text-align: left;
 }
 
 .sect1 .scoreboard .header {
