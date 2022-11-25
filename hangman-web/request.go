@@ -60,7 +60,7 @@ func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, atte
 func RegisterUser(input, password, confirmpassword string)bool{
 	if hc.Len(hc.StringToSlice(input)) != 0 && hc.Len(hc.StringToSlice(password)) != 0 && password == confirmpassword {
 		if !UserExist(input) {
-			usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
+			usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_APPEND|os.O_RDWR|os.O_CREATE, 0600)
 			if err != nil {
 				fmt.Println(err)
 			}

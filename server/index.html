@@ -83,9 +83,13 @@
         </div>
         {{ if eq .Status "register"}}
         <div class="registerpop">
+            <h2>Register you account</h2>
             <form action="/register" method="post" autocomplete="off">
-                <input type="text">
-                <input type="submit">
+                <input name="username" type="text" class="textInputBox" placeholder="Username">
+                <input name="password" type="password" class="textInputBox" placeholder="Enter password">
+                <input name="confirmpassword" type="password" class="textInputBox" placeholder="Confirm password">
+                <input type="submit" class="buttonInput" value="Register">
+                <a href="/logout">I already have an account</a>
             </form>
         </div>
         {{ end }}

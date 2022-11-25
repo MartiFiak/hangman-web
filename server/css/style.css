@@ -4,6 +4,7 @@
     margin: 0;
     z-index: 1;
     user-select: none;
+    text-decoration: none;
 }
 
 body {
@@ -277,8 +278,8 @@ form {
 .registerpop {
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    height: 75vh;
     width: 50vw;
+    padding: 8% 0;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -288,8 +289,21 @@ form {
 .registerpop form {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    height: 100%;
     justify-content: center;
     margin: 0 auto;
+}
+
+.registerpop .textInputBox {
+    margin: 10px auto;
+}
+
+.registerpop .buttonInput {
+    margin: 10px auto;
+}
+
+.registerpop h2 {
+    color: white;
+    padding-bottom: 5%;
+    font-size: 2em;
+    font-weight: bold;
 }

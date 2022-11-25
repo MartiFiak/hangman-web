@@ -95,6 +95,20 @@ func LogOutHundler(w http.ResponseWriter, r *http.Request) {
 
 func RegisterHundler(w http.ResponseWriter, r *http.Request){
 	hangmanweb.SetCookieAccount(w, "", "register")
+	switch r.Method {
+	case "POST":
+		if err := r.ParseForm(); err != nil {
+			fmt.Println(err)
+			return
+		} else {
+			username := r.FormValue("username")
+			password := r.FormValue("password")
+			confirmpassword := r.FormValue("confirmpassword")
+			if hangmanweb.RegisterUser(username, password, confirmpassword) {
+				hangmanweb.SetCookieAccount(w, username, "login")
+			}
+		}
+	}
 	http.Redirect(w, r, "/home", http.StatusFound)
 }
 
