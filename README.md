@@ -1,52 +1,85 @@
-# SUMMARY
-1. [Introduction](#hangman-web)
-2. [Requirement](#requirement)
-3. [How to start the game](#how-to-start-the-game)
-4. [Game content](#game-content)
+# **Hangman Web**
+*Contributors: Daubress Alexy, Mace Léo, Jacolot Marine*
 
 <br>
 
-# Introduction
-* Name : Hangman-Web
-* Contributors: Daubress Alexy, Mace Léo, Jacolot Marine
-
-The Hangman-web project aims to be able to play the hangman game in the computer language *Golang* from a web page.
+## **📋 Summary**
 
 <br>
 
-# Requirement  
-* A browser
-* Internet access
+1. [Introduction](#🎅-story)
+2. [Requirement](#✅-here-is-what-you-will-need)
+3. [How to start the game](#🛷-to-join-us)
+4. [Game content](#🎯-what-will-you-have-access-to)
 
 <br>
 
-# How to start the game 
-1. Go to this link : https://hangman-web-lma.herokuapp.com/home
+## **🎅 Story**
+
+<br>
+
+❗️Tree days ago, Santa Claus was kidnapped by an anti-Christmas who wants to hang him.❗️
+
+The elves have embarked on an expedition to free Santa Claus and save Christmas.
+
+<br>
+
+**Want to join the expedition?**
+
+<br>
+
+## **✅ Here is what you will need :**
+
+<br>
+
+* A computer 💻 or phone📱
+* An internet connection
+* And nothing more...
+
+<br>
+
+## **🛷 To join us :**
+
+<br>
+
+1. Go to : **[ *https://hangman-web-lma.herokuapp.com/* ]**
 2. Create your account
-3. Log in
+3. Connect yourself
 4. Try to save Christmas and enjoy 😏
 
 <br>
 
-# Game content
-
-## A harder game ?
-A more difficult game?
-
-Click on the difficulty level of your choice among the three available
+## **🎯 What will you have access to ?**
 
 <br>
 
-## Don't remember the rules of the game? 
-They are available at any time in the dedicated tab "Rules"
+Different levels of difficulty.
+
+To change the difficulty, simply click on the button corresponding to it.
 
 <br>
 
-## Do you want to challenge yourself?
-A "Scoreboard" tab is available to find out if you are a boss or unknown to the battalion 
+## **🤔 Don't you know the hangman rules ?**
+
+<br>
+
+No worries, go to the "Rules" menu where everything will be explained.
+
+<br>
+
+
+**The elves have also set up a table to see who is the best contributor to the expedition.**
+
+Made in sorts to rise as high as possible in the classification so as to have better gifts.
 
 Would you be up to the task of being in the top 3 🏆 ? 
 
 <br>
+<br>
 
-## Here you know everything. Now all you have to do is save Christmas with Santa Claus threatening with death. Would you be able to save Santa Claus from hanging? ? 😈
+**Now you know everything.**
+
+Will you come and help us save Santa Claus so that children around the world can receive their Christmas gifts?
+
+
+## **We are counting on you so join us!**
