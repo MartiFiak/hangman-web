@@ -18,12 +18,13 @@ type Hangman struct {
 Contient les informations global du jeu.
 */
 type GlobalInfo struct {
-	Username  string
-	Status    string
-	DeadSanta int
-	SaveSanta int
-	Ratio     int
-	Total     int
+	Username   string
+	Status     string
+	DeadSanta  int
+	SaveSanta  int
+	Ratio      int
+	Total      int
+	ErrMessage string
 }
 
 /*
@@ -34,8 +35,8 @@ type User struct {
 	Win      int
 	Loose    int
 	GamePlay int
-	Level	 int
-	Exp		 int
+	Level    int
+	Exp      int
 }
 
 /*

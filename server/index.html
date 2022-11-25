@@ -58,6 +58,9 @@
                     {{if ne (len .Username) 0}}
                     <p>{{ .Username }}</p>
                     {{ else }}
+                    {{if and (ne (len .ErrMessage) 0) (ne .Status "register") }}
+                    <p class="errmessage">{{ .ErrMessage }}</p>
+                    {{ end }}
                     <input class="textInputBox" name="input" type="text", placeholder="Enter Your name" autofocus/>
                     <input class="textInputBox" name="password" type="password", placeholder="Enter Your password" autofocus/>
                     <p class="registertext">Don't have account ? <a href="/register">Register</a></p>
@@ -85,6 +88,9 @@
         <div class="registerpop">
             <h2>Register you account</h2>
             <form action="/register" method="post" autocomplete="off">
+                {{if and (ne (len .ErrMessage) 0) (eq .Status "register") }}
+                <p class="errmessage">{{ .ErrMessage }}</p>
+                {{ end }}
                 <input name="username" type="text" class="textInputBox" placeholder="Username">
                 <input name="password" type="password" class="textInputBox" placeholder="Enter password">
                 <input name="confirmpassword" type="password" class="textInputBox" placeholder="Confirm password">

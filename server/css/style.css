@@ -307,3 +307,8 @@ form {
     font-size: 2em;
     font-weight: bold;
 }
+
+.errmessage {
+    color: red;
+    font-size: 0.8em;
+}

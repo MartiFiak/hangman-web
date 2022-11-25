@@ -139,27 +139,27 @@ func UpdateUserValue(win bool, w http.ResponseWriter, r *http.Request, sbUsersLi
 					multi = 3
 				}
 				if win {
-					xpGain := multi * gameLaunch[CookieSession(w, r, gameLaunch)].Attempts + multi
-					if xpGain + AtoiWithoutErr(userIngetData[6]) >= AtoiWithoutErr(userIngetData[5]) * 100 {
-						levelGain ++
+					xpGain := multi*gameLaunch[CookieSession(w, r, gameLaunch)].Attempts + multi
+					if xpGain+AtoiWithoutErr(userIngetData[6]) >= AtoiWithoutErr(userIngetData[5])*100 {
+						levelGain++
 					}
 					// 			attempts * multi + multi
-					sbUsersList.UsersList = append(sbUsersList.UsersList, User{userIngetData[0], AtoiWithoutErr(userIngetData[2]) + 1, AtoiWithoutErr(userIngetData[3]), AtoiWithoutErr(userIngetData[4]) + 1,AtoiWithoutErr(userIngetData[5])+levelGain,AtoiWithoutErr(userIngetData[6]) + xpGain - (((AtoiWithoutErr(userIngetData[5])) * 100)*levelGain)})
+					sbUsersList.UsersList = append(sbUsersList.UsersList, User{userIngetData[0], AtoiWithoutErr(userIngetData[2]) + 1, AtoiWithoutErr(userIngetData[3]), AtoiWithoutErr(userIngetData[4]) + 1, AtoiWithoutErr(userIngetData[5]) + levelGain, AtoiWithoutErr(userIngetData[6]) + xpGain - (((AtoiWithoutErr(userIngetData[5])) * 100) * levelGain)})
 					getDataUsersDB[ligne][2] = strconv.Itoa(AtoiWithoutErr(getDataUsersDB[ligne][2]) + 1)
 					getDataUsersDB[ligne][4] = strconv.Itoa(AtoiWithoutErr(getDataUsersDB[ligne][4]) + 1)
-					getDataUsersDB[ligne][6] = strconv.Itoa(AtoiWithoutErr(userIngetData[6]) + xpGain - (((AtoiWithoutErr(userIngetData[5])) * 100)*levelGain))
-					getDataUsersDB[ligne][5] = strconv.Itoa(AtoiWithoutErr(userIngetData[5])+levelGain)
+					getDataUsersDB[ligne][6] = strconv.Itoa(AtoiWithoutErr(userIngetData[6]) + xpGain - (((AtoiWithoutErr(userIngetData[5])) * 100) * levelGain))
+					getDataUsersDB[ligne][5] = strconv.Itoa(AtoiWithoutErr(userIngetData[5]) + levelGain)
 				} else {
 					xpGain := multi
-					if xpGain + AtoiWithoutErr(userIngetData[6]) >= AtoiWithoutErr(userIngetData[5]) * 100 {
-						levelGain ++
+					if xpGain+AtoiWithoutErr(userIngetData[6]) >= AtoiWithoutErr(userIngetData[5])*100 {
+						levelGain++
 					}
 					// 			+ multi
-					sbUsersList.UsersList = append(sbUsersList.UsersList, User{userIngetData[0], AtoiWithoutErr(userIngetData[2]) + 1, AtoiWithoutErr(userIngetData[3]), AtoiWithoutErr(userIngetData[4]) + 1,AtoiWithoutErr(userIngetData[5])+levelGain,AtoiWithoutErr(userIngetData[6]) + xpGain - (((AtoiWithoutErr(userIngetData[5])) * 100)*levelGain)})
+					sbUsersList.UsersList = append(sbUsersList.UsersList, User{userIngetData[0], AtoiWithoutErr(userIngetData[2]) + 1, AtoiWithoutErr(userIngetData[3]), AtoiWithoutErr(userIngetData[4]) + 1, AtoiWithoutErr(userIngetData[5]) + levelGain, AtoiWithoutErr(userIngetData[6]) + xpGain - (((AtoiWithoutErr(userIngetData[5])) * 100) * levelGain)})
 					getDataUsersDB[ligne][3] = strconv.Itoa(AtoiWithoutErr(getDataUsersDB[ligne][3]) + 1)
 					getDataUsersDB[ligne][4] = strconv.Itoa(AtoiWithoutErr(getDataUsersDB[ligne][4]) + 1)
-					getDataUsersDB[ligne][6] = strconv.Itoa(AtoiWithoutErr(userIngetData[6]) + xpGain - (((AtoiWithoutErr(userIngetData[5])) * 100)*levelGain))
-					getDataUsersDB[ligne][5] = strconv.Itoa(AtoiWithoutErr(userIngetData[5])+levelGain)
+					getDataUsersDB[ligne][6] = strconv.Itoa(AtoiWithoutErr(userIngetData[6]) + xpGain - (((AtoiWithoutErr(userIngetData[5])) * 100) * levelGain))
+					getDataUsersDB[ligne][5] = strconv.Itoa(AtoiWithoutErr(userIngetData[5]) + levelGain)
 					//5 = level
 					//6 = exp		+ multi
 				}

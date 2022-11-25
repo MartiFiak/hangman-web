@@ -90,7 +90,8 @@ func LogOutHundler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/home", http.StatusFound)
 }
 
-func RegisterHundler(w http.ResponseWriter, r *http.Request){
+func RegisterHundler(w http.ResponseWriter, r *http.Request) {
+	globaldata.ErrMessage = ""
 	hangmanweb.SetCookieAccount(w, "", "register")
 	switch r.Method {
 	case "POST":
@@ -103,6 +104,9 @@ func RegisterHundler(w http.ResponseWriter, r *http.Request){
 			confirmpassword := r.FormValue("confirmpassword")
 			if hangmanweb.RegisterUser(username, password, confirmpassword) {
 				hangmanweb.SetCookieAccount(w, username, "login")
+				globaldata.ErrMessage = ""
+			} else {
+				globaldata.ErrMessage = "User already used or password don't match"
 			}
 		}
 	}
@@ -240,15 +244,23 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 			} else {
 				input := r.FormValue("input")
 				password := r.FormValue("password")
-				if hangmanweb.InputUsernameTreatment(input, password) {
+				switch hangmanweb.InputUsernameTreatment(input, password){
+				case "true":
+					globaldata.ErrMessage = ""
 					StartGame(input, difficulty, w, r)
 					http.Redirect(w, r, "/hangman", http.StatusFound)
 					return
+				case "WrongPassWord":
+					globaldata.ErrMessage = "Wrong username or password"
+				case "false":
+					globaldata.ErrMessage = "User didn't exist"
 				}
 			}
 		}
 	default:
+		if globaldata.Status != "register"{
+			globaldata.ErrMessage = ""
+		}
 	}
 	tmpl.Execute(w, globaldata)
-
 }

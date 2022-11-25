@@ -103,9 +103,8 @@ func UserExist(username string) bool{
 
 }
 
-func InputUsernameTreatment(input, password string) bool {
+func InputUsernameTreatment(input, password string) string {
 	if hc.Len(hc.StringToSlice(input)) != 0 && hc.Len(hc.StringToSlice(password)) != 0 {
-		userExist := "false"
 
 		usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
 		if err != nil {
@@ -123,23 +122,17 @@ func InputUsernameTreatment(input, password string) bool {
 		for _, user := range getDataUsersDB {
 			if user[0] == input {
 				if user[1] == password {
-					userExist = "true"
+					return "true"
 				} else {
-					userExist = "WrongPassWord"
+					return "WrongPassWord"
 
 				}
 			}
 		}
 
-		if userExist == "false" { // Si l'utilisateur n'existe pas
-			return false
-		} else if userExist == "WrongPassWord" { // Si il existe mais que le mot de passe est mauvais on lui dit
-			return false
-		} else { // Si l'utilisateur existe et que le mot de passe est bon on le connect
-			return true
-		}
+		return "false"
 
 	} else {
-		return false
+		return "false"
 	}
 }
