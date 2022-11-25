@@ -3,12 +3,16 @@ package hangmanweb
 import (
 	"encoding/csv"
 	"fmt"
+	"net/http"
 	"os"
 	"strconv"
-	"net/http"
 )
 
-func InitGlobalValue(globaldata GlobalInfo) GlobalInfo{
+func InitGlobalValue(r *http.Request, globaldata GlobalInfo) GlobalInfo {
+
+	globaldata.Username = GetCookieAccount(r)
+
+	globaldata.Status = GetCookieStatus(r)
 
 	globalDatabase, err := os.OpenFile("./server/database/global.csv", os.O_RDWR|os.O_CREATE, 0600)
 	if err != nil {
@@ -52,7 +56,11 @@ func InitGlobalValue(globaldata GlobalInfo) GlobalInfo{
 	return globaldata
 }
 
-func UpdateGlobalValue(save bool, globaldata GlobalInfo) GlobalInfo{
+func UpdateGlobalValue(r *http.Request, save bool, globaldata GlobalInfo) GlobalInfo {
+
+	globaldata.Username = GetCookieAccount(r)
+
+	globaldata.Status = GetCookieStatus(r)
 
 	globalDatabase, err := os.OpenFile("./server/database/global.csv", os.O_RDONLY|os.O_CREATE, 0600)
 	if err != nil {

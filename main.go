@@ -25,6 +25,8 @@ func main() {
 	fs := http.FileServer(http.Dir("./server"))
 	http.Handle("/server/", http.StripPrefix("/server/", fs))
 
+	http.HandleFunc("/logout", LogOutHundler)
+	http.HandleFunc("/register", RegisterHundler)
 	http.HandleFunc("/home", IndexHandler)
 	http.HandleFunc("/", GameHandler)
 	http.HandleFunc("/hangman", GameInputHandler)
@@ -86,8 +88,19 @@ func ScoreHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, sbUsersList)
 }
 
+func LogOutHundler(w http.ResponseWriter, r *http.Request) {
+	hangmanweb.SetCookieAccount(w, "", "logout")
+	http.Redirect(w, r, "/home", http.StatusFound)
+}
+
+func RegisterHundler(w http.ResponseWriter, r *http.Request){
+	hangmanweb.SetCookieAccount(w, "", "register")
+	http.Redirect(w, r, "/home", http.StatusFound)
+}
+
 func StartGame(input, difficulty string, w http.ResponseWriter, r *http.Request) {
 	dataList = hangmanweb.InitGame(difficulty)
+	hangmanweb.SetCookieAccount(w, input, "login")
 	gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)] = hangmanweb.Hangman{
 		PlayerName: input,
 		WordToFind: dataList[0],
@@ -154,10 +167,10 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 
 				switch dataList[0] {
 				case "WinPage":
-					globaldata = hangmanweb.UpdateGlobalValue(true, globaldata)
+					globaldata = hangmanweb.UpdateGlobalValue(r, true, globaldata)
 					sbUsersList = hangmanweb.UpdateUserValue(true, w, r, sbUsersList, gameLaunch)
 				case "LoosePage":
-					globaldata = hangmanweb.UpdateGlobalValue(false, globaldata)
+					globaldata = hangmanweb.UpdateGlobalValue(r, false, globaldata)
 					sbUsersList = hangmanweb.UpdateUserValue(false, w, r, sbUsersList, gameLaunch)
 				}
 
@@ -186,7 +199,7 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
-	globaldata = hangmanweb.InitGlobalValue(globaldata)
+	globaldata = hangmanweb.InitGlobalValue(r, globaldata)
 	hangmanweb.CookieSession(w, r, gameLaunch)
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
@@ -209,12 +222,17 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		} else {
 			difficulty := r.Form.Get("difficulty")
-			input := r.FormValue("input")
-			password := r.FormValue("password")
-			if hangmanweb.InputUsernameTreatment(input, password) {
-				StartGame(input, difficulty, w, r)
+			if hangmanweb.GetCookieAccount(r) != "" {
+				StartGame(hangmanweb.GetCookieAccount(r), difficulty, w, r)
 				http.Redirect(w, r, "/hangman", http.StatusFound)
-				return
+			} else {
+				input := r.FormValue("input")
+				password := r.FormValue("password")
+				if hangmanweb.InputUsernameTreatment(input, password) {
+					StartGame(input, difficulty, w, r)
+					http.Redirect(w, r, "/hangman", http.StatusFound)
+					return
+				}
 			}
 		}
 	default:

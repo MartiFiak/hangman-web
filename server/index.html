@@ -19,6 +19,7 @@
             <div class="logo">
                 <img class="logo1" id="home" src="./server/images/logo/logo2.png">
             </div>
+            <p>{{ .Username}}</p>
             <embed src="./server/sound/Deck the Halls - Kevin MacLeod.mp3" loop="true" autostart="true">
         </div>
     <!--rightbox-->
@@ -50,13 +51,17 @@
         
                 <h1 class="title">Hangman Web</h1>
                 <h2>Welcome to Hangman Web</h2>
-                
                 <div class="sizeContent">
                 </div>
 
                 <form action="/home" method="post" autocomplete="off">
+                    {{if ne (len .Username) 0}}
+                    <p>{{ .Username }}</p>
+                    {{ else }}
                     <input class="textInputBox" name="input" type="text", placeholder="Enter Your name" autofocus/>
                     <input class="textInputBox" name="password" type="password", placeholder="Enter Your password" autofocus/>
+                    <p class="registertext">Don't have account ? <a href="/register">Register</a></p>
+                    {{ end }}
                     <input class="buttonInput" type="submit" value="Start Game" />
                     <!-- Boutons de difficultés -->
                     <div class="radiogroup">
@@ -68,6 +73,7 @@
                         <label for="hard-button" class="button-label">Hard</label>
                     </div>
                 </form>
+                <a href="/logout"><img src="./server/images/icon/logout.png" alt="" class="logouticon"></a>
 
             </div>
             <div class="saveprogression">
@@ -75,6 +81,14 @@
                 <div class="saveprogressionbar"><div class="progression" style="width:{{ .Ratio}}%"></div></div>
             </div>
         </div>
+        {{ if eq .Status "register"}}
+        <div class="registerpop">
+            <form action="/register" method="post" autocomplete="off">
+                <input type="text">
+                <input type="submit">
+            </form>
+        </div>
+        {{ end }}
         <img class="slide-tl" src="./server/images/background/santaclaus.png" alt="">
         <img class="bgbl" src="./server/images/background/bgbl.png" alt="">
         <img class="star1 star" src="./server/images/background/star1.png" alt="">

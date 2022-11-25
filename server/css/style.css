@@ -57,6 +57,7 @@ form {
 .buttonInput {
     border-radius: 50px;
     margin: 20px;
+    margin-top: 0;
     width: 50%;
     height: 50px;
     border: none;
@@ -249,4 +250,46 @@ form {
     background-image: linear-gradient(to right,#741135,#741135bb,#7411357c);
     height: 100%;
     border-radius: 1vh;
+}
+
+.logouticon {
+    position: absolute;
+    object-position: bottom right;
+    bottom: 20px;
+    right: 20px;
+    height: 50px;
+    width: 50px;
+}
+
+.registertext a {
+    color: #5C0F40;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.registertext {
+    font-size: 0.8em;
+    margin: 20px;
+}
+
+
+.registerpop {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    height: 75vh;
+    width: 50vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.registerpop form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    margin: 0 auto;
 }

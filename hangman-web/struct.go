@@ -18,25 +18,27 @@ type Hangman struct {
 Contient les informations global du jeu.
 */
 type GlobalInfo struct {
-	DeadSanta	int
-	SaveSanta	int
-	Ratio		int
-	Total		int
+	Username  string
+	Status    string
+	DeadSanta int
+	SaveSanta int
+	Ratio     int
+	Total     int
 }
 
 /*
 Contient les informations d'un utilisateur.
 */
 type User struct {
-	Username	string
-	Win			int
-	Loose		int
-	GamePlay	int
+	Username string
+	Win      int
+	Loose    int
+	GamePlay int
 }
 
 /*
 Contient tous les utilisateurs et leurs informations.
 */
 type ScoreboardData struct {
-	UsersList 	[]User
+	UsersList []User
 }
