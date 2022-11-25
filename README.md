@@ -2,7 +2,7 @@
 1. [Introduction](#hangman-web)
 2. [Requirement](#requirement)
 3. [How to start the game](#how-to-start-the-game)
-4. [Optional feature](#optional-feature)
+4. [Game content](#game-content)
 
 <br>
 
