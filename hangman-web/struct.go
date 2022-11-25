@@ -34,6 +34,8 @@ type User struct {
 	Win      int
 	Loose    int
 	GamePlay int
+	Level	 int
+	Exp		 int
 }
 
 /*

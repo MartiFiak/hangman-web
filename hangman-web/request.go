@@ -68,7 +68,7 @@ func RegisterUser(input, password, confirmpassword string)bool{
 
 			csvWriterGlobalDB := csv.NewWriter(usersDatabase)
 
-			newData := []string{input, password, "0", "0", "0"} // Username, Password, Win, Lose, GamePlay
+			newData := []string{input, password, "0", "0", "0", "1", "0"} // Username, Password, Win, Lose, GamePlay, level, xp
 			err = csvWriterGlobalDB.Write(newData)
 			if err != nil {
 				fmt.Println(err)

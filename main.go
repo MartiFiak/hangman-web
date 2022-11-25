@@ -57,10 +57,9 @@ func ScoreHandler(w http.ResponseWriter, r *http.Request) {
 
 	if len(getDataUsersDB) != 0 {
 		for _, userIngetData := range getDataUsersDB {
-			sbUsersList.UsersList = append(sbUsersList.UsersList, hangmanweb.User{userIngetData[0], hangmanweb.AtoiWithoutErr(userIngetData[2]), hangmanweb.AtoiWithoutErr(userIngetData[3]), hangmanweb.AtoiWithoutErr(userIngetData[4])})
+			sbUsersList.UsersList = append(sbUsersList.UsersList, hangmanweb.User{userIngetData[0], hangmanweb.AtoiWithoutErr(userIngetData[2]), hangmanweb.AtoiWithoutErr(userIngetData[3]), hangmanweb.AtoiWithoutErr(userIngetData[4]), 0, 0})
 		}
 	}
-	// Tri des données        rang basé sur win*ratio
 
 	for i := 0; i < len(sbUsersList.UsersList); i++ {
 		for j := i; j < len(sbUsersList.UsersList); j++ {
@@ -82,8 +81,6 @@ func ScoreHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
-
-	// Penser a actualisé le scoarboard
 
 	tmpl.Execute(w, sbUsersList)
 }
@@ -183,6 +180,7 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 				case "WinPage":
 					globaldata = hangmanweb.UpdateGlobalValue(r, true, globaldata)
 					sbUsersList = hangmanweb.UpdateUserValue(true, w, r, sbUsersList, gameLaunch)
+					//////// Ajout de 10*difficulté exp
 				case "LoosePage":
 					globaldata = hangmanweb.UpdateGlobalValue(r, false, globaldata)
 					sbUsersList = hangmanweb.UpdateUserValue(false, w, r, sbUsersList, gameLaunch)
