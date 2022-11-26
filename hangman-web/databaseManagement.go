@@ -14,6 +14,10 @@ func InitGlobalValue(r *http.Request, globaldata GlobalInfo) GlobalInfo {
 
 	globaldata.Status = GetCookieStatus(r)
 
+	if globaldata.Status == "login" {
+		globaldata.UserLevel, globaldata.UserXpAv = AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[5]), float64(AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[6])/AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[5]))
+	}
+
 	globalDatabase, err := os.OpenFile("./server/database/global.csv", os.O_RDWR|os.O_CREATE, 0600)
 	if err != nil {
 		fmt.Println(err)
@@ -61,6 +65,10 @@ func UpdateGlobalValue(r *http.Request, save bool, globaldata GlobalInfo) Global
 	globaldata.Username = GetCookieAccount(r)
 
 	globaldata.Status = GetCookieStatus(r)
+
+	if globaldata.Status == "login" {
+		globaldata.UserLevel, globaldata.UserXpAv = AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[5]), float64(AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[6])/AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[5]))
+	}
 
 	globalDatabase, err := os.OpenFile("./server/database/global.csv", os.O_RDONLY|os.O_CREATE, 0600)
 	if err != nil {
@@ -184,4 +192,50 @@ func UpdateUserValue(win bool, w http.ResponseWriter, r *http.Request, sbUsersLi
 	defer csvWriterUsersDB.Flush()
 
 	return sbUsersList
+}
+
+func UserExist(username string) bool{
+	usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer usersDatabase.Close()
+
+	csvReaderUserslDB := csv.NewReader(usersDatabase)
+	getDataUsersDB, err := csvReaderUserslDB.ReadAll()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, user := range getDataUsersDB {
+		if user[0] == username {
+			return true
+		}
+	}
+	return false
+
+}
+
+func GetUserInfo(username string) []string{
+	usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer usersDatabase.Close()
+
+	csvReaderUserslDB := csv.NewReader(usersDatabase)
+	getDataUsersDB, err := csvReaderUserslDB.ReadAll()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, user := range getDataUsersDB {
+		if user[0] == username {
+			return user
+		}
+	}
+	return []string{}
+
 }

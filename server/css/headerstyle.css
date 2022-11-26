@@ -33,21 +33,22 @@ header {
     padding: 2px 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    font-size: 12px;
 }
 
 .xpprogressionbar {
     width: 8vw;
-    background-color: rgba(0, 0, 0, 0.5);
+    border-width: 2px;
+    border-color: #20022ba4;
+    border-style: solid;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
 
 
 .xppprogression {
-    background-color: aqua;
+    background-image: linear-gradient(to right,#20022ba4,#761A55);
     height: 100%;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
 }
 
 .logo1 {

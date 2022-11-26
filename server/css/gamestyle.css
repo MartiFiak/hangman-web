@@ -26,6 +26,10 @@
     margin: 25px;
 }
 
+.endpage p {
+    text-align: center;
+}
+
 .endpage .content {
     margin: 50px;
     position: relative;
@@ -95,14 +99,9 @@ h2 {
     letter-spacing: 5px;
 }
 
-p {
-    text-align: justify; 
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .letterUsed {
     letter-spacing: 5px;
+    text-align: center;
 }
 
 form {

@@ -18,13 +18,15 @@
             <!-- Logo -->
             <div class="leftbloc">
                 <img class="logo1" id="home" src="./server/images/logo/logo2.png">
+                {{ if eq .Status "login"}}
                 <div class="userpart">
                     <p><b>{{ .Username}}</b></p>
                     <div class="xpprogression">
-                        <p>1</p>
-                        <div class="xpprogressionbar"><div class="xppprogression" style="width:50%"></div></div>
+                        <p>{{ .UserLevel }}</p>
+                        <div class="xpprogressionbar"><div class="xppprogression" style="width:{{ .UserXpAv }}%"></div></div>
                     </div>
                 </div>
+                {{ end }}
             </div>
             <embed src="./server/sound/Deck the Halls - Kevin MacLeod.mp3" loop="true" autostart="true">
         </div>

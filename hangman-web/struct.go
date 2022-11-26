@@ -5,6 +5,8 @@ Contient les informations de la partie courante.
 */
 type Hangman struct {
 	PlayerName string
+	UserLevel  int
+	UserXpAv   float64
 	WordToFind string
 	Attempts   int
 	LetterUsed string
@@ -19,6 +21,8 @@ Contient les informations global du jeu.
 */
 type GlobalInfo struct {
 	Username   string
+	UserLevel  int
+	UserXpAv   float64
 	Status     string
 	DeadSanta  int
 	SaveSanta  int

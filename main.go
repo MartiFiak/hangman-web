@@ -118,6 +118,8 @@ func StartGame(input, difficulty string, w http.ResponseWriter, r *http.Request)
 	hangmanweb.SetCookieAccount(w, input, "login")
 	gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)] = hangmanweb.Hangman{
 		PlayerName: input,
+		UserLevel: hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
+		UserXpAv: float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6])/hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
 		WordToFind: dataList[0],
 		Attempts:   10,
 		LetterUsed: dataList[2],
@@ -154,6 +156,8 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 
 				gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)] = hangmanweb.Hangman{
 					PlayerName: gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)].PlayerName,
+					UserLevel: hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
+					UserXpAv: float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6])/hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
 					WordToFind: gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)].WordToFind,
 					Attempts:   hangmanweb.AtoiWithoutErr(dataList[3]),
 					LetterUsed: dataList[4],
@@ -171,6 +175,8 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 			} else {
 				gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)] = hangmanweb.Hangman{
 					PlayerName: gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)].PlayerName,
+					UserLevel: hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
+					UserXpAv: float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6])/hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
 					WordToFind: gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)].WordToFind,
 					Attempts:   hangmanweb.AtoiWithoutErr(dataList[3]),
 					LetterUsed: dataList[4],

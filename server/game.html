@@ -18,7 +18,13 @@
             <!-- Logo -->
             <div class="leftbloc">
                 <img class="logo1" id="home" src="./server/images/logo/logo2.png">
-                <p>{{ .PlayerName}}</p>
+                <div class="userpart">
+                    <p><b>{{ .PlayerName}}</b></p>
+                    <div class="xpprogression">
+                        <p>{{ .UserLevel }}</p>
+                        <div class="xpprogressionbar"><div class="xppprogression" style="width:{{ .UserXpAv }}%"></div></div>
+                    </div>
+                </div>
             </div>
         </div>
     <!--rightbox-->
@@ -65,7 +71,7 @@
             <h2 class="wordState">{{ .Word}}</h2>
 
             {{ if eq (len .LetterUsed) 0 }}
-            <p>No letter used</p>
+            <p class="letterUsed">No letter used</p>
             {{ else }}
             <p class="letterUsed"> {{ .LetterUsed}}</p>
             {{ end }}

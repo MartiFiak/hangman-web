@@ -80,29 +80,6 @@ func RegisterUser(input, password, confirmpassword string)bool{
 	return false
 }
 
-func UserExist(username string) bool{
-	usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	defer usersDatabase.Close()
-
-	csvReaderUserslDB := csv.NewReader(usersDatabase)
-	getDataUsersDB, err := csvReaderUserslDB.ReadAll()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	for _, user := range getDataUsersDB {
-		if user[0] == username {
-			return true
-		}
-	}
-	return false
-
-}
-
 func InputUsernameTreatment(input, password string) string {
 	if hc.Len(hc.StringToSlice(input)) != 0 && hc.Len(hc.StringToSlice(password)) != 0 {
 
