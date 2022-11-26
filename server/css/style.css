@@ -312,3 +312,7 @@ form {
     color: red;
     font-size: 0.8em;
 }
+
+form .username {
+    margin: 20px;
+}

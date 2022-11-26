@@ -64,7 +64,7 @@
 
                 <form action="/home" method="post" autocomplete="off">
                     {{if ne (len .Username) 0}}
-                    <p>{{ .Username }}</p>
+                    <p class="username"><b>Login as {{ .Username }}</b></p>
                     {{ else }}
                     {{if and (ne (len .ErrMessage) 0) (ne .Status "register") }}
                     <p class="errmessage">{{ .ErrMessage }}</p>

@@ -50,7 +50,7 @@
             <div class="content">
                 {{ range $i, $a := .UsersList }}
                 <div class="item">                  
-                    <p class="itemsect">{{$i}}</p>
+                    <p class="itemsect">{{ if eq $i 0}} 👑 {{ else }} {{$i}} {{ end }}</p>
                     <p class="itemsect">{{ .Username}}</p>
                     <p class="itemsect">{{ .Win}}</p>
                     <p class="itemsect">{{ .Loose}}</p>
