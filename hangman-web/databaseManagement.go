@@ -8,14 +8,18 @@ import (
 	"strconv"
 )
 
-func InitGlobalValue(r *http.Request, globaldata GlobalInfo) GlobalInfo {
+func InitGlobalValue(w http.ResponseWriter, r *http.Request, globaldata GlobalInfo) GlobalInfo {
 
 	globaldata.Username = GetCookieAccount(r)
 
 	globaldata.Status = GetCookieStatus(r)
 
-	if globaldata.Status == "login" {
+	if globaldata.Status == "login" && UserExist(globaldata.Username) {
 		globaldata.UserLevel, globaldata.UserXpAv = AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[5]), float64(AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[6])/AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[5]))
+	}
+
+	if !UserExist(globaldata.Username) {
+		SetCookieAccount(w, "", "logout")
 	}
 
 	globalDatabase, err := os.OpenFile("./server/database/global.csv", os.O_RDWR|os.O_CREATE, 0600)
@@ -60,14 +64,18 @@ func InitGlobalValue(r *http.Request, globaldata GlobalInfo) GlobalInfo {
 	return globaldata
 }
 
-func UpdateGlobalValue(r *http.Request, save bool, globaldata GlobalInfo) GlobalInfo {
+func UpdateGlobalValue(w http.ResponseWriter, r *http.Request, save bool, globaldata GlobalInfo) GlobalInfo {
 
 	globaldata.Username = GetCookieAccount(r)
 
 	globaldata.Status = GetCookieStatus(r)
 
-	if globaldata.Status == "login" {
+	if globaldata.Status == "login" && UserExist(globaldata.Username) {
 		globaldata.UserLevel, globaldata.UserXpAv = AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[5]), float64(AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[6])/AtoiWithoutErr(GetUserInfo(GetCookieAccount(r))[5]))
+	}
+
+	if !UserExist(globaldata.Username) {
+		SetCookieAccount(w, "", "logout")
 	}
 
 	globalDatabase, err := os.OpenFile("./server/database/global.csv", os.O_RDONLY|os.O_CREATE, 0600)
@@ -194,7 +202,7 @@ func UpdateUserValue(win bool, w http.ResponseWriter, r *http.Request, sbUsersLi
 	return sbUsersList
 }
 
-func UserExist(username string) bool{
+func UserExist(username string) bool {
 	usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
 	if err != nil {
 		fmt.Println(err)
@@ -217,7 +225,7 @@ func UserExist(username string) bool{
 
 }
 
-func GetUserInfo(username string) []string{
+func GetUserInfo(username string) []string {
 	usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
 	if err != nil {
 		fmt.Println(err)

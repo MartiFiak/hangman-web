@@ -118,8 +118,8 @@ func StartGame(input, difficulty string, w http.ResponseWriter, r *http.Request)
 	hangmanweb.SetCookieAccount(w, input, "login")
 	gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)] = hangmanweb.Hangman{
 		PlayerName: input,
-		UserLevel: hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
-		UserXpAv: float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6])/hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
+		UserLevel:  hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
+		UserXpAv:   float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6]) / hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
 		WordToFind: dataList[0],
 		Attempts:   10,
 		LetterUsed: dataList[2],
@@ -156,8 +156,8 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 
 				gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)] = hangmanweb.Hangman{
 					PlayerName: gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)].PlayerName,
-					UserLevel: hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
-					UserXpAv: float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6])/hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
+					UserLevel:  hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
+					UserXpAv:   float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6]) / hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
 					WordToFind: gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)].WordToFind,
 					Attempts:   hangmanweb.AtoiWithoutErr(dataList[3]),
 					LetterUsed: dataList[4],
@@ -175,8 +175,8 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 			} else {
 				gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)] = hangmanweb.Hangman{
 					PlayerName: gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)].PlayerName,
-					UserLevel: hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
-					UserXpAv: float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6])/hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
+					UserLevel:  hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5]),
+					UserXpAv:   float64(hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[6]) / hangmanweb.AtoiWithoutErr(hangmanweb.GetUserInfo(hangmanweb.GetCookieAccount(r))[5])),
 					WordToFind: gameLaunch[hangmanweb.CookieSession(w, r, gameLaunch)].WordToFind,
 					Attempts:   hangmanweb.AtoiWithoutErr(dataList[3]),
 					LetterUsed: dataList[4],
@@ -188,11 +188,11 @@ func GameInputHandler(w http.ResponseWriter, r *http.Request) {
 
 				switch dataList[0] {
 				case "WinPage":
-					globaldata = hangmanweb.UpdateGlobalValue(r, true, globaldata)
+					globaldata = hangmanweb.UpdateGlobalValue(w, r, true, globaldata)
 					sbUsersList = hangmanweb.UpdateUserValue(true, w, r, sbUsersList, gameLaunch)
 					//////// Ajout de 10*difficulté exp
 				case "LoosePage":
-					globaldata = hangmanweb.UpdateGlobalValue(r, false, globaldata)
+					globaldata = hangmanweb.UpdateGlobalValue(w, r, false, globaldata)
 					sbUsersList = hangmanweb.UpdateUserValue(false, w, r, sbUsersList, gameLaunch)
 				}
 
@@ -221,7 +221,7 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 
-	globaldata = hangmanweb.InitGlobalValue(r, globaldata)
+	globaldata = hangmanweb.InitGlobalValue(w, r, globaldata)
 	hangmanweb.CookieSession(w, r, gameLaunch)
 
 	tmpl := template.Must(template.ParseFiles("./server/index.html"))
@@ -250,7 +250,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 			} else {
 				input := r.FormValue("input")
 				password := r.FormValue("password")
-				switch hangmanweb.InputUsernameTreatment(input, password){
+				switch hangmanweb.InputUsernameTreatment(input, password) {
 				case "true":
 					globaldata.ErrMessage = ""
 					StartGame(input, difficulty, w, r)
@@ -264,7 +264,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	default:
-		if globaldata.Status != "register"{
+		if globaldata.Status != "register" {
 			globaldata.ErrMessage = ""
 		}
 	}
