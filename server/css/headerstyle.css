@@ -5,8 +5,49 @@ header {
     z-index: 2;
 }
 
-.logo {
-    margin: 30px 40px;
+.leftbloc {
+    padding: 30px 40px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+}
+
+.userpart {
+    margin: auto 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.xpprogression {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.xpprogression p{
+    background-color: rgba(128, 128, 128, 0.5);
+    padding: 2px 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.xpprogressionbar {
+    width: 8vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+.xppprogression {
+    background-color: aqua;
+    height: 100%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .logo1 {
@@ -22,8 +63,7 @@ header {
     justify-content: space-evenly;
 }
 
-div#content div{
-    display: flex;
+.leftbox {
     width: 50vw;
 }
 
@@ -31,6 +71,7 @@ div#content div{
     display: flex;
     justify-content: end;
     margin-right: 5vw;
+    width: 50vw;
 }
 
 nav.menu ul li.bouton{
