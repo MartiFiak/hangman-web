@@ -14,6 +14,10 @@ var WordsFile = "./hangman-classic/assets/words.txt"
 
 func InitGame(mode string) []string {
 
+	/*
+	Init value to play game
+	*/
+
 	switch mode {
 	case "easy":
 		WordsFile = "./hangman-classic/assets/words.txt"
@@ -39,6 +43,9 @@ func InitGame(mode string) []string {
 }
 
 func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, attempts int) []string {
+	/*
+	Verify and treat input of user during the game
+	*/
 	if hc.Len(hc.StringToSlice(input)) != 0 {
 		useLettreSlice := []string{}
 		word, vowelsCount, attempts, useLettreSlice, _ = hc.InputProcessing("easy", word, wordToFind, hc.ReplaceAccentMaj(input), attempts, 0, hc.StringToSlice(useLettre), "")
@@ -58,6 +65,9 @@ func InputTreatment(word, wordToFind, input, useLettre string, vowelsCount, atte
 }
 
 func RegisterUser(input, password, confirmpassword string) bool {
+	/*
+	Create an account to user in database
+	*/
 	if hc.Len(hc.StringToSlice(input)) != 0 && hc.Len(hc.StringToSlice(password)) != 0 && password == confirmpassword {
 		if !UserExist(input) {
 			usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_APPEND|os.O_RDWR|os.O_CREATE, 0600)
@@ -81,6 +91,9 @@ func RegisterUser(input, password, confirmpassword string) bool {
 }
 
 func InputUsernameTreatment(input, password string) string {
+	/*
+	Check information use by user to login in
+	*/
 	if hc.Len(hc.StringToSlice(input)) != 0 && hc.Len(hc.StringToSlice(password)) != 0 {
 
 		usersDatabase, err := os.OpenFile("./server/database/users.csv", os.O_RDWR|os.O_CREATE, 0600)
