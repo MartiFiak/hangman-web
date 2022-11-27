@@ -13,7 +13,6 @@ body {
 h1 {
     color: #de3d7b;
     text-align: center;
-    font-size: 80px;
   }
 
 h2 {
@@ -68,7 +67,6 @@ h2 {
 .sect1 .scoreboard .header {
     margin-bottom: 20px;
     text-align: center;
-    font-size: 30px;
     font-weight: bold;
 
 }
@@ -79,15 +77,4 @@ h2 {
     flex-direction: row;
     margin-bottom: 20px;
     text-align: center;
-    font-size: 30px;
-}
-
-.bgbl {
-    z-index: -1;
-    position: absolute;
-    height: 75vh;
-    width: 75vh;
-    bottom: 0;
-    left: 0;
-    object-position: left bottom;
 }

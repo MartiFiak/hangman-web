@@ -1,0 +1,22 @@
+
+.star {
+    height: 100vh;
+}
+
+@media screen and (width >= 900px) {
+    .bgbl {
+        width: 700px;
+    }
+}
+
+@media screen and (700px <= width <= 900px){
+    .bgbl {
+        width: 500px;
+    }
+}
+
+@media screen and (width <= 700px){
+    .bgbl {
+        width: 400px;
+    }
+}

@@ -1,19 +1,123 @@
-h1 {
-
-}
-
-h2 {
-
-}
-
-h3 {
-
-}
-
-h4 {
-
-}
-
-p {
+@media screen and (min-width:900px) {   
     
+    h1 {
+        font-size: 80px;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .registertext p {
+        font-size: 0.8em;
+    }
+
+    .registertext a {
+        font-size: 1em;
+    }
+
+    .saveprogressiontitle {
+        font-size: 0.8em;
+    }
+
+    .scoreboard p {
+        font-size: 30px;
+    }
+
+    .attempts {
+        font-size: 500px;
+    }
+
+    .errmessage {
+        font-size: 0.8em;
+    }
+
+    label {
+        font-size: 1em;
+    }
+}
+
+@media screen and (768px <= width <= 900px) {
+     
+    h1 {
+        font-size: 70px;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    .registertext p {
+        font-size: 0.8em;
+    }
+
+    .registertext a {
+        font-size: 1em;
+    }
+
+    .saveprogressiontitle {
+        font-size: 0.8em;
+    }
+
+    .scoreboard p {
+        font-size: 20px;
+    }
+
+    .attempts {
+        font-size: 400px;
+    }
+
+    .errmessage {
+        font-size: 0.8em;
+    }
+
+    label {
+        font-size: 0.9em;
+    }
+    
+}
+
+@media screen and (550px <= width <= 768px) {   
+    
+    h1 {
+        font-size: 60px;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    .registertext p {
+        font-size: 0.8em;
+    }
+
+    .registertext a {
+        font-size: 1em;
+    }
+
+    .saveprogressiontitle {
+        font-size: 0.8em;
+    }
+
+    .scoreboard p {
+        font-size: 16px;
+    }
+
+    .attempts {
+        font-size: 350px;
+    }
+
+    .errmessage {
+        font-size: 0.8em;
+    }
+
+    label {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (width <= 550px) {
+    .attempts {
+        font-size: 200px;
+    }
 }
