@@ -253,7 +253,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 				switch hangmanweb.InputUsernameTreatment(input, password) {
 				case "true":
 					globaldata.ErrMessage = ""
-					StartGame(input, difficulty, w, r)
+					hangmanweb.SetCookieAccount(w, input, "login")
 					http.Redirect(w, r, "/hangman", http.StatusFound)
 					return
 				case "WrongPassWord":

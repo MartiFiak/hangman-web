@@ -75,8 +75,9 @@
                     <input class="textInputBox" name="password" type="password", placeholder="Enter Your password" autofocus/>
                     <p class="registertext">Don't have account ? <a href="/register">Register</a></p>
                     {{ end }}
-                    <input class="buttonInput" type="submit" value="Start Game" />
+                    <input class="buttonInput" type="submit" value="{{ if ne .Status "login" }} Login {{ else }} Start Game {{ end }}" />
                     <!-- Boutons de difficultés -->
+                    {{ if eq .Status "login" }}
                     <div class="radiogroup">
                         <input type="radio" name="difficulty" id="easy-button" class="hidden radio-label" value="easy" checked/>
                         <label for="easy-button" class="button-label">Easy</label>
@@ -85,8 +86,11 @@
                         <input type="radio" name="difficulty" id="hard-button" class="hidden radio-label" value="hard")/>
                         <label for="hard-button" class="button-label">Hard</label>
                     </div>
+                    {{ end }}
                 </form>
+                {{ if eq .Status "login" }}
                 <a href="/logout"><img src="./server/images/icon/logout.png" alt="" class="logouticon"></a>
+                {{ end }}
 
             </div>
             <div class="saveprogression">
