@@ -10,7 +10,6 @@
 body {
     background-image: linear-gradient(#551343,#761A55, #A12050);
     margin: 0 auto;
-    width: 100vw;
 }
 
 h1 {
@@ -100,9 +99,9 @@ form {
     }
 
     .principal {
-        width: 75%;
+        width: 100%;
     }
-    /*768px for mobil*/
+
     .content {
         justify-content: center;
         height: 100%;
@@ -111,16 +110,6 @@ form {
     .saveprogression {
         display: none;
     }
-
-    /*input[type="text"]{
-        min-width: 280px;
-    }
-    input[type="password"]{
-        min-width: 280px;
-    }
-    input[type="submit"]{
-        min-width: 260px;
-    }*/
 }
 
 
