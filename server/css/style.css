@@ -35,7 +35,7 @@ form {
 
 .textInputBox {
     background-color: rgba(255, 255, 255, 0.25);
-    margin: 5px;
+    margin: 5px auto;
     border-radius: 50px;
     width: 50%;
     height: 50px;
@@ -56,7 +56,7 @@ form {
 
 .buttonInput {
     border-radius: 50px;
-    margin: 20px;
+    margin: 20px auto;
     margin-top: 0;
     width: 50%;
     height: 50px;
@@ -100,7 +100,7 @@ form {
     }
 
     .principal {
-        width: 50%;
+        width: 75%;
     }
     /*768px for mobil*/
     .content {
@@ -112,7 +112,7 @@ form {
         display: none;
     }
 
-    input[type="text"]{
+    /*input[type="text"]{
         min-width: 280px;
     }
     input[type="password"]{
@@ -120,7 +120,7 @@ form {
     }
     input[type="submit"]{
         min-width: 260px;
-    }
+    }*/
 }
 
 
