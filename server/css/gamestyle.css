@@ -170,9 +170,9 @@ form {
 
 .hangman-display {
     position: absolute;
-    height: 70vh;
+    height: 60vh;
     object-position: right bottom;
     z-index: 0;
-    bottom: 10%;
+    bottom: 0;
     right: 0;
 }
